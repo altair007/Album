@@ -35,17 +35,30 @@
     
         // 下面的代码应该被封装
         // 创建并设置相册
-        self.album = [[[UIScrollView alloc] initWithFrame:self.frame] autorelease];
-        [self addSubview: self.album];
+        self.scrollView = [[[UIScrollView alloc] initWithFrame:self.frame] autorelease];
+        [self addSubview: self.scrollView];
         
         // 设置相册"大小"
-        self.album.contentSize = CGSizeMake(self.frame.size.width * self.dataSource.count, self.frame.size.height);
+        self.scrollView.contentSize = CGSizeMake(self.frame.size.width * self.dataSource.count, self.frame.size.height);
         
         // 设置分页效果
-        self.album.pagingEnabled = YES;
+        self.scrollView.pagingEnabled = YES;
+        
+        // 设置背景色
+        self.scrollView.backgroundColor = [UIColor redColor];
         
         // 设置代理
-        self.album.delegate = self.delegate;
+        self.scrollView.delegate = self.delegate;
+        
+        // 不显示滚动条.
+        /*这么做的原因:
+         1.显示滚动条不美观
+         2.选择显示滚动条,系统会自动为UIScrollView添加两个对应的滚动条子视图;会影响某些依赖于UIScrollView子视图个数的方法的逻辑.
+         */
+        self.scrollView.showsHorizontalScrollIndicator =NO;
+        self.scrollView.showsVerticalScrollIndicator =NO;
+
+        
         
         // 根据数据源中的数据创建相片
         [self.dataSource enumerateObjectsUsingBlock:^(UIImage * img, NSUInteger idx, BOOL *stop) {
@@ -56,13 +69,26 @@
             scrollView.minimumZoomScale = 0.5;
             scrollView.maximumZoomScale = 3.0;
             
+            // 不显示滚动条.
+            /*这么做的原因:
+             1.显示滚动条不美观
+             2.选择显示滚动条,系统会自动为UIScrollView添加两个对应的滚动条子视图;会影响某些依赖于UIScrollView子视图个数的方法的逻辑.
+             */
+            scrollView.showsHorizontalScrollIndicator =NO;
+            scrollView.showsVerticalScrollIndicator =NO;
+            
+            // 设置背景色
+            scrollView.backgroundColor = [UIColor grayColor];
+            
             // 设置代理
             scrollView.delegate = self.delegate;
             
-            [self.album addSubview: scrollView];
+            [self.scrollView addSubview: scrollView];
             
             // 相框设置
             UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, scrollView.frame.size.width, scrollView.frame.size.height)];
+            
+            // 打开交互
             imageView.userInteractionEnabled = YES;
             
             // 相片
@@ -82,14 +108,17 @@
         self.pageControl.backgroundColor = [UIColor grayColor];
         
         // 设置透明度
-        self.pageControl.alpha = 0.5;
+        self.pageControl.alpha = 0.3;
         
         // 设置分页数量
         self.pageControl.numberOfPages = self.dataSource.count;
         
         // 设置分页指示器颜色
-        self.pageControl.currentPageIndicatorTintColor = [UIColor greenColor];
-        self.pageControl.pageIndicatorTintColor = [UIColor blueColor];
+        self.pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+        self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+        
+        // 设置何时显示当前页(圆点)
+        self.pageControl.defersCurrentPageDisplay = YES;
         
         // 添加响应方法
         [self.pageControl addTarget:self.delegate action:@selector(handlePageControlAction:) forControlEvents: UIControlEventValueChanged];
@@ -103,7 +132,7 @@
         self.label.adjustsFontSizeToFitWidth = YES;
         
         // 设置颜色.
-        self.label.textColor = [UIColor blueColor];
+        self.label.textColor = [UIColor grayColor];
         
         [self addSubview: self.label];
     }
@@ -117,7 +146,7 @@
     self.dataSource = nil;
     self.pageControl = nil;
     self.label = nil;
-    self.album = nil;
+    self.scrollView = nil;
     
     [super dealloc];
 }

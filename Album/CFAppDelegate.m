@@ -24,11 +24,10 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+
     CFMainViewController * controller = [[CFMainViewController alloc] init];
     self.window.rootViewController = controller;
     [controller release];
-    
     return YES;
 }
 

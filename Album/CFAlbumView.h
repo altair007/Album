@@ -32,8 +32,7 @@ typedef id<CFAlbumViewDelegate> AlbumDelegate;
 @property (retain, nonatomic) UIPageControl * pageControl; //!< 页面控制
 @property (retain, nonatomic) UILabel * label; //!< 信息提示
 @property (assign, nonatomic) AlbumDelegate delegate; //!< 符合相册协议的代理
-// !!!: 命名为album,很不合适!
-@property (retain, nonatomic) UIScrollView * album; //!< 相册
+@property (retain, nonatomic) UIScrollView * scrollView; //!< 相册
 
 #pragma mark - 便利初始化
 - (instancetype) initWithFrame: (CGRect) frame
