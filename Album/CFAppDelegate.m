@@ -26,8 +26,14 @@
     [self.window makeKeyAndVisible];
 
     CFMainViewController * controller = [[CFMainViewController alloc] init];
-    self.window.rootViewController = controller;
+    
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    
+    self.window.rootViewController = navController;
+    
     [controller release];
+    [navController release];
+    
     return YES;
 }
 

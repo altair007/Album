@@ -14,6 +14,6 @@
  */
 @interface CFMainViewController : UIViewController <CFAlbumViewDelegate>
 #pragma mark - 属性
-
+@property (retain, nonatomic) CFAlbumView * album; //!< 相册
 
 @end

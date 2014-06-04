@@ -96,6 +96,10 @@
             
             [scrollView addSubview:imageView];
             
+            // 添加触摸手势,点击显示详情!
+            UITapGestureRecognizer * recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.delegate action:@selector(tapGesture:)];
+            [imageView addGestureRecognizer: recognizer];
+            
             // 释放临时变量
             [scrollView release];
             [imageView release];
@@ -126,7 +130,7 @@
         [self addSubview: self.pageControl];
         
         // 添加lable,显示相册信息.
-        self.label = [[[UILabel alloc] initWithFrame:CGRectMake( 0, self.frame.size.height * 0.05, self.frame.size.width * 0.3, self.frame.size.height * 0.05)] autorelease];
+        self.label = [[[UILabel alloc] initWithFrame:CGRectMake( 0, 64, self.frame.size.width * 0.3, self.frame.size.height * 0.05)] autorelease];
         self.label.text = [[[NSString alloc]initWithFormat:@"当前正在显示 %d/%ld", 1, self.dataSource.count] autorelease];
         // 设置文本自适应
         self.label.adjustsFontSizeToFitWidth = YES;

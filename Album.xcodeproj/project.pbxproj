@@ -32,6 +32,9 @@
 		C2610DF51938C06B003E034A /* the_secret_10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DEC1938C06B003E034A /* the_secret_10.jpg */; };
 		C2610DF61938C06B003E034A /* the_secret_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DED1938C06B003E034A /* the_secret_1.jpg */; };
 		C2610DF81938C7F9003E034A /* the_secret_7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DF71938C7F9003E034A /* the_secret_7.jpg */; };
+		C2D5DD63193F461000796AF7 /* CFPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5DD62193F461000796AF7 /* CFPhotoViewController.m */; };
+		C2EEFB1F193A1C0F0035F3A8 /* CFMyAlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EEFB1E193A1C0F0035F3A8 /* CFMyAlbumView.m */; };
+		C2EEFB22193A1D240035F3A8 /* CFMyAlbumPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EEFB21193A1D230035F3A8 /* CFMyAlbumPageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +79,12 @@
 		C2610DEC1938C06B003E034A /* the_secret_10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_10.jpg; sourceTree = "<group>"; };
 		C2610DED1938C06B003E034A /* the_secret_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_1.jpg; sourceTree = "<group>"; };
 		C2610DF71938C7F9003E034A /* the_secret_7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_7.jpg; sourceTree = "<group>"; };
+		C2D5DD61193F461000796AF7 /* CFPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoViewController.h; sourceTree = "<group>"; };
+		C2D5DD62193F461000796AF7 /* CFPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFPhotoViewController.m; sourceTree = "<group>"; };
+		C2EEFB1D193A1C0F0035F3A8 /* CFMyAlbumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFMyAlbumView.h; sourceTree = "<group>"; };
+		C2EEFB1E193A1C0F0035F3A8 /* CFMyAlbumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFMyAlbumView.m; sourceTree = "<group>"; };
+		C2EEFB20193A1D230035F3A8 /* CFMyAlbumPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFMyAlbumPageView.h; sourceTree = "<group>"; };
+		C2EEFB21193A1D230035F3A8 /* CFMyAlbumPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFMyAlbumPageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +163,12 @@
 				C2610DE01938A8E6003E034A /* readme.md */,
 				C2610DE21938AC04003E034A /* CFAlbumView.h */,
 				C2610DE31938AC04003E034A /* CFAlbumView.m */,
+				C2EEFB1D193A1C0F0035F3A8 /* CFMyAlbumView.h */,
+				C2EEFB1E193A1C0F0035F3A8 /* CFMyAlbumView.m */,
+				C2EEFB20193A1D230035F3A8 /* CFMyAlbumPageView.h */,
+				C2EEFB21193A1D230035F3A8 /* CFMyAlbumPageView.m */,
+				C2D5DD61193F461000796AF7 /* CFPhotoViewController.h */,
+				C2D5DD62193F461000796AF7 /* CFPhotoViewController.m */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -294,9 +309,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2EEFB1F193A1C0F0035F3A8 /* CFMyAlbumView.m in Sources */,
 				C2610DBB1938A7F5003E034A /* main.m in Sources */,
+				C2D5DD63193F461000796AF7 /* CFPhotoViewController.m in Sources */,
 				C2610DE41938AC04003E034A /* CFAlbumView.m in Sources */,
 				C2610DBF1938A7F5003E034A /* CFAppDelegate.m in Sources */,
+				C2EEFB22193A1D240035F3A8 /* CFMyAlbumPageView.m in Sources */,
 				C2610DDF1938A848003E034A /* CFMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,6 +516,7 @@
 				C2610DD91938A7F5003E034A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C2610DDA1938A7F5003E034A /* Build configuration list for PBXNativeTarget "AlbumTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +525,7 @@
 				C2610DDC1938A7F5003E034A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

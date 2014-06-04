@@ -8,12 +8,19 @@
 
 #import "CFMainViewController.h"
 #import "CFAlbumView.h"
+#import "CFPhotoViewController.h"
 
 @interface CFMainViewController ()
 
 @end
 
 @implementation CFMainViewController
+- (void) dealloc
+{
+    self.album = nil;
+    
+    [super dealloc];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,6 +35,8 @@
 {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"相册";
+    
     // 创建相册
     // FIXME:此处应该使用一个model
     NSArray * photoes = @[[UIImage imageNamed:@"the_secret_1.jpg"],
@@ -41,9 +50,8 @@
                           [UIImage imageNamed:@"the_secret_9.jpg"],
                           [UIImage imageNamed:@"the_secret_10.jpg"]];
     
-    CFAlbumView * album = [[CFAlbumView alloc] initWithFrame:[UIScreen mainScreen].bounds  delegate:self dataSource:photoes];
-    [self.view addSubview: album];
-    [album release];
+    self.album = [[[CFAlbumView alloc] initWithFrame:[UIScreen mainScreen].bounds  delegate:self dataSource:photoes] autorelease];
+    [self.view addSubview: self.album];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,6 +61,16 @@
 }
 
 #pragma mark - 协议方法
+- (void) tapGesture: (UITapGestureRecognizer *) gesture
+{
+    CFPhotoViewController * photoVC = [[CFPhotoViewController alloc] init];
+    photoVC.title = self.album.label.text;
+    
+    [self.navigationController pushViewController:photoVC animated:YES];
+    
+    [photoVC release];
+}
+
 - (void) handlePageControlAction:(UIPageControl *)pageControl
 {
     // 获取相册对象
