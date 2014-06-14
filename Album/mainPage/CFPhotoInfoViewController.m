@@ -6,13 +6,13 @@
 //  Copyright (c) 2014年 Shadow. All rights reserved.
 //
 
-#import "CFPhotoViewController.h"
+#import "CFPhotoInfoViewController.h"
 
-@interface CFPhotoViewController ()
+@interface CFPhotoInfoViewController ()
 
 @end
 
-@implementation CFPhotoViewController
+@implementation CFPhotoInfoViewController
 -(void)dealloc
 {
     self.title = nil;
@@ -45,17 +45,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    if ([self isViewLoaded] && nil == self.view.window) {
+        self.view = nil;
+    }
+    
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

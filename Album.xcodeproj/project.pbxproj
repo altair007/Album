@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2218D8D194C2BC000CD7BE7 /* CFPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2218D8C194C2BC000CD7BE7 /* CFPhotoView.m */; };
+		C23446D3194BEBD200B32839 /* the_secret_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446C9194BEBD200B32839 /* the_secret_1.jpg */; };
+		C23446D4194BEBD200B32839 /* the_secret_10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446CA194BEBD200B32839 /* the_secret_10.jpg */; };
+		C23446D5194BEBD200B32839 /* the_secret_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446CB194BEBD200B32839 /* the_secret_2.jpg */; };
+		C23446D6194BEBD200B32839 /* the_secret_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446CC194BEBD200B32839 /* the_secret_3.jpg */; };
+		C23446D7194BEBD200B32839 /* the_secret_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446CD194BEBD200B32839 /* the_secret_4.jpg */; };
+		C23446D8194BEBD200B32839 /* the_secret_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446CE194BEBD200B32839 /* the_secret_5.jpg */; };
+		C23446D9194BEBD200B32839 /* the_secret_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446CF194BEBD200B32839 /* the_secret_6.jpg */; };
+		C23446DA194BEBD200B32839 /* the_secret_7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446D0194BEBD200B32839 /* the_secret_7.jpg */; };
+		C23446DB194BEBD200B32839 /* the_secret_8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446D1194BEBD200B32839 /* the_secret_8.jpg */; };
+		C23446DC194BEBD200B32839 /* the_secret_9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446D2194BEBD200B32839 /* the_secret_9.jpg */; };
+		C23446E3194BEFEC00B32839 /* CFAlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C23446E2194BEFEC00B32839 /* CFAlbumModel.m */; };
+		C23446E6194BF03000B32839 /* CFAlbumController.m in Sources */ = {isa = PBXBuildFile; fileRef = C23446E5194BF03000B32839 /* CFAlbumController.m */; };
+		C23446EA194BF1D800B32839 /* CFAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C23446E9194BF1D800B32839 /* CFAlbumViewController.m */; };
+		C2344747194C0C0F00B32839 /* CFAlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2344744194C0C0F00B32839 /* CFAlbumView.m */; };
+		C2344748194C0C0F00B32839 /* CFPhotoInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2344746194C0C0F00B32839 /* CFPhotoInfoViewController.m */; };
 		C2610DAF1938A7F5003E034A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2610DAE1938A7F5003E034A /* Foundation.framework */; };
 		C2610DB11938A7F5003E034A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2610DB01938A7F5003E034A /* CoreGraphics.framework */; };
 		C2610DB31938A7F5003E034A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2610DB21938A7F5003E034A /* UIKit.framework */; };
@@ -19,22 +35,7 @@
 		C2610DCA1938A7F5003E034A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2610DB21938A7F5003E034A /* UIKit.framework */; };
 		C2610DD21938A7F5003E034A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C2610DD01938A7F5003E034A /* InfoPlist.strings */; };
 		C2610DD41938A7F5003E034A /* AlbumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2610DD31938A7F5003E034A /* AlbumTests.m */; };
-		C2610DDF1938A848003E034A /* CFMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2610DDE1938A848003E034A /* CFMainViewController.m */; };
 		C2610DE11938A8E6003E034A /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = C2610DE01938A8E6003E034A /* readme.md */; };
-		C2610DE41938AC04003E034A /* CFAlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2610DE31938AC04003E034A /* CFAlbumView.m */; };
-		C2610DEE1938C06B003E034A /* the_secret_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DE51938C06B003E034A /* the_secret_2.jpg */; };
-		C2610DEF1938C06B003E034A /* the_secret_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DE61938C06B003E034A /* the_secret_3.jpg */; };
-		C2610DF01938C06B003E034A /* the_secret_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DE71938C06B003E034A /* the_secret_4.jpg */; };
-		C2610DF11938C06B003E034A /* the_secret_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DE81938C06B003E034A /* the_secret_5.jpg */; };
-		C2610DF21938C06B003E034A /* the_secret_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DE91938C06B003E034A /* the_secret_6.jpg */; };
-		C2610DF31938C06B003E034A /* the_secret_8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DEA1938C06B003E034A /* the_secret_8.jpg */; };
-		C2610DF41938C06B003E034A /* the_secret_9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DEB1938C06B003E034A /* the_secret_9.jpg */; };
-		C2610DF51938C06B003E034A /* the_secret_10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DEC1938C06B003E034A /* the_secret_10.jpg */; };
-		C2610DF61938C06B003E034A /* the_secret_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DED1938C06B003E034A /* the_secret_1.jpg */; };
-		C2610DF81938C7F9003E034A /* the_secret_7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2610DF71938C7F9003E034A /* the_secret_7.jpg */; };
-		C2D5DD63193F461000796AF7 /* CFPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D5DD62193F461000796AF7 /* CFPhotoViewController.m */; };
-		C2EEFB1F193A1C0F0035F3A8 /* CFMyAlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EEFB1E193A1C0F0035F3A8 /* CFMyAlbumView.m */; };
-		C2EEFB22193A1D240035F3A8 /* CFMyAlbumPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2EEFB21193A1D230035F3A8 /* CFMyAlbumPageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C2218D8B194C2BC000CD7BE7 /* CFPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoView.h; sourceTree = "<group>"; };
+		C2218D8C194C2BC000CD7BE7 /* CFPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFPhotoView.m; sourceTree = "<group>"; };
+		C23446C9194BEBD200B32839 /* the_secret_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_1.jpg; sourceTree = "<group>"; };
+		C23446CA194BEBD200B32839 /* the_secret_10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_10.jpg; sourceTree = "<group>"; };
+		C23446CB194BEBD200B32839 /* the_secret_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_2.jpg; sourceTree = "<group>"; };
+		C23446CC194BEBD200B32839 /* the_secret_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_3.jpg; sourceTree = "<group>"; };
+		C23446CD194BEBD200B32839 /* the_secret_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_4.jpg; sourceTree = "<group>"; };
+		C23446CE194BEBD200B32839 /* the_secret_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_5.jpg; sourceTree = "<group>"; };
+		C23446CF194BEBD200B32839 /* the_secret_6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_6.jpg; sourceTree = "<group>"; };
+		C23446D0194BEBD200B32839 /* the_secret_7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_7.jpg; sourceTree = "<group>"; };
+		C23446D1194BEBD200B32839 /* the_secret_8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_8.jpg; sourceTree = "<group>"; };
+		C23446D2194BEBD200B32839 /* the_secret_9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_9.jpg; sourceTree = "<group>"; };
+		C23446E1194BEFEC00B32839 /* CFAlbumModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAlbumModel.h; sourceTree = "<group>"; };
+		C23446E2194BEFEC00B32839 /* CFAlbumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAlbumModel.m; sourceTree = "<group>"; };
+		C23446E4194BF03000B32839 /* CFAlbumController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAlbumController.h; sourceTree = "<group>"; };
+		C23446E5194BF03000B32839 /* CFAlbumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAlbumController.m; sourceTree = "<group>"; };
+		C23446E8194BF1D800B32839 /* CFAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAlbumViewController.h; sourceTree = "<group>"; };
+		C23446E9194BF1D800B32839 /* CFAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAlbumViewController.m; sourceTree = "<group>"; };
+		C2344743194C0C0F00B32839 /* CFAlbumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAlbumView.h; sourceTree = "<group>"; };
+		C2344744194C0C0F00B32839 /* CFAlbumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAlbumView.m; sourceTree = "<group>"; };
+		C2344745194C0C0F00B32839 /* CFPhotoInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoInfoViewController.h; sourceTree = "<group>"; };
+		C2344746194C0C0F00B32839 /* CFPhotoInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFPhotoInfoViewController.m; sourceTree = "<group>"; };
 		C2610DAB1938A7F5003E034A /* Album.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Album.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2610DAE1938A7F5003E034A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C2610DB01938A7F5003E034A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -64,27 +87,7 @@
 		C2610DCF1938A7F5003E034A /* AlbumTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AlbumTests-Info.plist"; sourceTree = "<group>"; };
 		C2610DD11938A7F5003E034A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C2610DD31938A7F5003E034A /* AlbumTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumTests.m; sourceTree = "<group>"; };
-		C2610DDD1938A848003E034A /* CFMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFMainViewController.h; sourceTree = "<group>"; };
-		C2610DDE1938A848003E034A /* CFMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFMainViewController.m; sourceTree = "<group>"; };
 		C2610DE01938A8E6003E034A /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.md; sourceTree = SOURCE_ROOT; };
-		C2610DE21938AC04003E034A /* CFAlbumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAlbumView.h; sourceTree = "<group>"; };
-		C2610DE31938AC04003E034A /* CFAlbumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAlbumView.m; sourceTree = "<group>"; };
-		C2610DE51938C06B003E034A /* the_secret_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_2.jpg; sourceTree = "<group>"; };
-		C2610DE61938C06B003E034A /* the_secret_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_3.jpg; sourceTree = "<group>"; };
-		C2610DE71938C06B003E034A /* the_secret_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_4.jpg; sourceTree = "<group>"; };
-		C2610DE81938C06B003E034A /* the_secret_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_5.jpg; sourceTree = "<group>"; };
-		C2610DE91938C06B003E034A /* the_secret_6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_6.jpg; sourceTree = "<group>"; };
-		C2610DEA1938C06B003E034A /* the_secret_8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_8.jpg; sourceTree = "<group>"; };
-		C2610DEB1938C06B003E034A /* the_secret_9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_9.jpg; sourceTree = "<group>"; };
-		C2610DEC1938C06B003E034A /* the_secret_10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_10.jpg; sourceTree = "<group>"; };
-		C2610DED1938C06B003E034A /* the_secret_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_1.jpg; sourceTree = "<group>"; };
-		C2610DF71938C7F9003E034A /* the_secret_7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_7.jpg; sourceTree = "<group>"; };
-		C2D5DD61193F461000796AF7 /* CFPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoViewController.h; sourceTree = "<group>"; };
-		C2D5DD62193F461000796AF7 /* CFPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFPhotoViewController.m; sourceTree = "<group>"; };
-		C2EEFB1D193A1C0F0035F3A8 /* CFMyAlbumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFMyAlbumView.h; sourceTree = "<group>"; };
-		C2EEFB1E193A1C0F0035F3A8 /* CFMyAlbumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFMyAlbumView.m; sourceTree = "<group>"; };
-		C2EEFB20193A1D230035F3A8 /* CFMyAlbumPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFMyAlbumPageView.h; sourceTree = "<group>"; };
-		C2EEFB21193A1D230035F3A8 /* CFMyAlbumPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFMyAlbumPageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +114,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C23446C8194BEBD200B32839 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				C23446C9194BEBD200B32839 /* the_secret_1.jpg */,
+				C23446CA194BEBD200B32839 /* the_secret_10.jpg */,
+				C23446CB194BEBD200B32839 /* the_secret_2.jpg */,
+				C23446CC194BEBD200B32839 /* the_secret_3.jpg */,
+				C23446CD194BEBD200B32839 /* the_secret_4.jpg */,
+				C23446CE194BEBD200B32839 /* the_secret_5.jpg */,
+				C23446CF194BEBD200B32839 /* the_secret_6.jpg */,
+				C23446D0194BEBD200B32839 /* the_secret_7.jpg */,
+				C23446D1194BEBD200B32839 /* the_secret_8.jpg */,
+				C23446D2194BEBD200B32839 /* the_secret_9.jpg */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
+		C23446E0194BEFEC00B32839 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				C23446E1194BEFEC00B32839 /* CFAlbumModel.h */,
+				C23446E2194BEFEC00B32839 /* CFAlbumModel.m */,
+				C23446E4194BF03000B32839 /* CFAlbumController.h */,
+				C23446E5194BF03000B32839 /* CFAlbumController.m */,
+			);
+			name = core;
+			path = Album/core;
+			sourceTree = SOURCE_ROOT;
+		};
+		C23446E7194BF15700B32839 /* mainPage */ = {
+			isa = PBXGroup;
+			children = (
+				C2344743194C0C0F00B32839 /* CFAlbumView.h */,
+				C2344744194C0C0F00B32839 /* CFAlbumView.m */,
+				C2218D8B194C2BC000CD7BE7 /* CFPhotoView.h */,
+				C2218D8C194C2BC000CD7BE7 /* CFPhotoView.m */,
+				C23446E8194BF1D800B32839 /* CFAlbumViewController.h */,
+				C23446E9194BF1D800B32839 /* CFAlbumViewController.m */,
+				C2344745194C0C0F00B32839 /* CFPhotoInfoViewController.h */,
+				C2344746194C0C0F00B32839 /* CFPhotoInfoViewController.m */,
+			);
+			path = mainPage;
+			sourceTree = "<group>";
+		};
 		C2610DA21938A7F5003E034A = {
 			isa = PBXGroup;
 			children = (
@@ -144,31 +191,14 @@
 		C2610DB41938A7F5003E034A /* Album */ = {
 			isa = PBXGroup;
 			children = (
-				C2610DF71938C7F9003E034A /* the_secret_7.jpg */,
-				C2610DE51938C06B003E034A /* the_secret_2.jpg */,
-				C2610DE61938C06B003E034A /* the_secret_3.jpg */,
-				C2610DE71938C06B003E034A /* the_secret_4.jpg */,
-				C2610DE81938C06B003E034A /* the_secret_5.jpg */,
-				C2610DE91938C06B003E034A /* the_secret_6.jpg */,
-				C2610DEA1938C06B003E034A /* the_secret_8.jpg */,
-				C2610DEB1938C06B003E034A /* the_secret_9.jpg */,
-				C2610DEC1938C06B003E034A /* the_secret_10.jpg */,
-				C2610DED1938C06B003E034A /* the_secret_1.jpg */,
 				C2610DBD1938A7F5003E034A /* CFAppDelegate.h */,
 				C2610DBE1938A7F5003E034A /* CFAppDelegate.m */,
 				C2610DC01938A7F5003E034A /* Images.xcassets */,
+				C23446E0194BEFEC00B32839 /* core */,
+				C23446E7194BF15700B32839 /* mainPage */,
 				C2610DB51938A7F5003E034A /* Supporting Files */,
-				C2610DDD1938A848003E034A /* CFMainViewController.h */,
-				C2610DDE1938A848003E034A /* CFMainViewController.m */,
 				C2610DE01938A8E6003E034A /* readme.md */,
-				C2610DE21938AC04003E034A /* CFAlbumView.h */,
-				C2610DE31938AC04003E034A /* CFAlbumView.m */,
-				C2EEFB1D193A1C0F0035F3A8 /* CFMyAlbumView.h */,
-				C2EEFB1E193A1C0F0035F3A8 /* CFMyAlbumView.m */,
-				C2EEFB20193A1D230035F3A8 /* CFMyAlbumPageView.h */,
-				C2EEFB21193A1D230035F3A8 /* CFMyAlbumPageView.m */,
-				C2D5DD61193F461000796AF7 /* CFPhotoViewController.h */,
-				C2D5DD62193F461000796AF7 /* CFPhotoViewController.m */,
+				C23446C8194BEBD200B32839 /* img */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -278,19 +308,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C23446DB194BEBD200B32839 /* the_secret_8.jpg in Resources */,
+				C23446D7194BEBD200B32839 /* the_secret_4.jpg in Resources */,
+				C23446D5194BEBD200B32839 /* the_secret_2.jpg in Resources */,
 				C2610DB91938A7F5003E034A /* InfoPlist.strings in Resources */,
-				C2610DF81938C7F9003E034A /* the_secret_7.jpg in Resources */,
-				C2610DF51938C06B003E034A /* the_secret_10.jpg in Resources */,
-				C2610DF31938C06B003E034A /* the_secret_8.jpg in Resources */,
+				C23446D3194BEBD200B32839 /* the_secret_1.jpg in Resources */,
+				C23446DC194BEBD200B32839 /* the_secret_9.jpg in Resources */,
 				C2610DE11938A8E6003E034A /* readme.md in Resources */,
-				C2610DEE1938C06B003E034A /* the_secret_2.jpg in Resources */,
+				C23446DA194BEBD200B32839 /* the_secret_7.jpg in Resources */,
+				C23446D4194BEBD200B32839 /* the_secret_10.jpg in Resources */,
+				C23446D9194BEBD200B32839 /* the_secret_6.jpg in Resources */,
+				C23446D8194BEBD200B32839 /* the_secret_5.jpg in Resources */,
 				C2610DC11938A7F5003E034A /* Images.xcassets in Resources */,
-				C2610DF01938C06B003E034A /* the_secret_4.jpg in Resources */,
-				C2610DF11938C06B003E034A /* the_secret_5.jpg in Resources */,
-				C2610DF41938C06B003E034A /* the_secret_9.jpg in Resources */,
-				C2610DF61938C06B003E034A /* the_secret_1.jpg in Resources */,
-				C2610DF21938C06B003E034A /* the_secret_6.jpg in Resources */,
-				C2610DEF1938C06B003E034A /* the_secret_3.jpg in Resources */,
+				C23446D6194BEBD200B32839 /* the_secret_3.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,13 +339,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2EEFB1F193A1C0F0035F3A8 /* CFMyAlbumView.m in Sources */,
 				C2610DBB1938A7F5003E034A /* main.m in Sources */,
-				C2D5DD63193F461000796AF7 /* CFPhotoViewController.m in Sources */,
-				C2610DE41938AC04003E034A /* CFAlbumView.m in Sources */,
+				C2344747194C0C0F00B32839 /* CFAlbumView.m in Sources */,
+				C2344748194C0C0F00B32839 /* CFPhotoInfoViewController.m in Sources */,
 				C2610DBF1938A7F5003E034A /* CFAppDelegate.m in Sources */,
-				C2EEFB22193A1D240035F3A8 /* CFMyAlbumPageView.m in Sources */,
-				C2610DDF1938A848003E034A /* CFMainViewController.m in Sources */,
+				C23446E3194BEFEC00B32839 /* CFAlbumModel.m in Sources */,
+				C23446EA194BF1D800B32839 /* CFAlbumViewController.m in Sources */,
+				C2218D8D194C2BC000CD7BE7 /* CFPhotoView.m in Sources */,
+				C23446E6194BF03000B32839 /* CFAlbumController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

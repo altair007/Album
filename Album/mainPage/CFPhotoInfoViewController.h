@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CFPhotoViewController : UIViewController
+@interface CFPhotoInfoViewController : UIViewController
 @property (copy ,nonatomic) NSString * title; //!< 标题
 
 @end

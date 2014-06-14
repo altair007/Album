@@ -7,7 +7,9 @@
 //
 
 #import "CFAppDelegate.h"
-#import "CFMainViewController.h"
+#import "CFAlbumController.h"
+#import "CFAlbumViewController.h"
+#import "CFAlbumModel.h"
 
 @implementation CFAppDelegate
 
@@ -22,17 +24,26 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-
-    CFMainViewController * controller = [[CFMainViewController alloc] init];
+    self.window.backgroundColor = [UIColor greenColor];
     
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    // 初始化主控制器
+    CFAlbumViewController * albumVC = [[CFAlbumViewController alloc] init];
+    CFAlbumModel * albumModel = [[CFAlbumModel alloc] init];
+    
+    CFAlbumController * sharedInstance = [CFAlbumController sharedInstance];
+    
+    sharedInstance.albumVC = albumVC;
+    [albumVC release];
+    
+    sharedInstance.albumModel = albumModel;
+    [albumModel release];
+    
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:sharedInstance.albumVC];
     
     self.window.rootViewController = navController;
-    
-    [controller release];
     [navController release];
+    
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
