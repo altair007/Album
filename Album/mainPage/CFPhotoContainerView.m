@@ -67,7 +67,7 @@
     }
     // !!!:临时添加输出对象地址,来判断是否是同一对象
     NSLog(@"%p", result);
-    
+
     return result;
 }
 

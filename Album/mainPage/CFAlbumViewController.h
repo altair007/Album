@@ -12,7 +12,7 @@
 /**
  *  相册视图控制器
  */
-@interface CFAlbumViewController : UIViewController <UIScrollViewDelegate>
+@interface CFAlbumViewController : UIViewController <UIScrollViewDelegate, CFAlbumViewDataSource>
 @property (retain, nonatomic) CFAlbumView * view; //!< 相册
 
 /**

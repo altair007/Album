@@ -13,10 +13,8 @@
 #import "CFPhotoContainerView.h"
 
 @interface CFAlbumView ()
-@property (retain, nonatomic, readwrite) NSMutableArray * photoViews; //!< 存储相片视图的数组.
 @property (retain, nonatomic, readwrite) UIPageControl * pageControl; //!< 页面控制
 @property (retain, nonatomic, readwrite) UILabel * label; //!< 信息提示
-@property (retain, nonatomic, readwrite) UIScrollView * albumSV; //!< 相册主视图
 @property (retain ,nonatomic, readwrite) CFPhotoContainerView * photoCV; //!< 照片容器视图.
 @end
 
@@ -24,10 +22,8 @@
 - (void)dealloc
 {
     self.namesOfPhotos = nil;
-    self.photoViews = nil;
     self.pageControl = nil;
     self.label = nil;
-    self.albumSV= nil;
     
     [super dealloc];
 }
@@ -124,7 +120,8 @@
     return self.photoCV.delegate;
 }
 
-- (CFPhotoView *) dequeueReusablePhotoView
+// FIXME:添加对index的支持,重新设置frame.
+- (CFPhotoView *) dequeueReusablePhotoViewAtIndex: (NSUInteger) index
 {
     CFPhotoView * result = [self.photoCV dequeueReusablePhotoView];
 
@@ -164,5 +161,31 @@
     if (NO == [self.subviews containsObject: _label]) {
         [self addSubview: _label];
     }
+}
+
+- (NSRange) latestRangeForVisiblePhotoViews
+{
+    NSRange range = NSMakeRange(0, 1);
+    
+    // 考虑往左过度偏移的情况
+    if (self.photoCV.contentOffset.x < 0) {
+        return range;
+    }
+    
+    
+    // ???:此处应该通过代理动态获取图片宽度.
+    CGFloat widthOfImg = self.photoCV.frame.size.width;
+    
+    // 计算最左侧显示的图片是第几张图片.
+    NSUInteger leftIndex = floor(self.photoCV.contentOffset.x / widthOfImg);
+    
+    // 计算最右侧显示的是第几张图片.
+    NSUInteger rightIndex = ceil((self.photoCV.contentOffset.x + self.photoCV.frame.size.width) / widthOfImg);
+    
+    // 设置可见图片的范围
+    range.location = leftIndex;
+    range.length = rightIndex - leftIndex + 1;;
+    
+    return range;
 }
 @end
