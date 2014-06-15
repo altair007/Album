@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C215AAF5194D5659008B60A1 /* CFPhotoContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C215AAF4194D5659008B60A1 /* CFPhotoContainerView.m */; };
 		C2218D8D194C2BC000CD7BE7 /* CFPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2218D8C194C2BC000CD7BE7 /* CFPhotoView.m */; };
 		C23446D3194BEBD200B32839 /* the_secret_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446C9194BEBD200B32839 /* the_secret_1.jpg */; };
 		C23446D4194BEBD200B32839 /* the_secret_10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446CA194BEBD200B32839 /* the_secret_10.jpg */; };
@@ -49,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C215AAF3194D5659008B60A1 /* CFPhotoContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoContainerView.h; sourceTree = "<group>"; };
+		C215AAF4194D5659008B60A1 /* CFPhotoContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFPhotoContainerView.m; sourceTree = "<group>"; };
 		C2218D8B194C2BC000CD7BE7 /* CFPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoView.h; sourceTree = "<group>"; };
 		C2218D8C194C2BC000CD7BE7 /* CFPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFPhotoView.m; sourceTree = "<group>"; };
 		C23446C9194BEBD200B32839 /* the_secret_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_1.jpg; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 				C23446E9194BF1D800B32839 /* CFAlbumViewController.m */,
 				C2344745194C0C0F00B32839 /* CFPhotoInfoViewController.h */,
 				C2344746194C0C0F00B32839 /* CFPhotoInfoViewController.m */,
+				C215AAF3194D5659008B60A1 /* CFPhotoContainerView.h */,
+				C215AAF4194D5659008B60A1 /* CFPhotoContainerView.m */,
 			);
 			path = mainPage;
 			sourceTree = "<group>";
@@ -345,6 +350,7 @@
 				C2610DBF1938A7F5003E034A /* CFAppDelegate.m in Sources */,
 				C23446E3194BEFEC00B32839 /* CFAlbumModel.m in Sources */,
 				C23446EA194BF1D800B32839 /* CFAlbumViewController.m in Sources */,
+				C215AAF5194D5659008B60A1 /* CFPhotoContainerView.m in Sources */,
 				C2218D8D194C2BC000CD7BE7 /* CFPhotoView.m in Sources */,
 				C23446E6194BF03000B32839 /* CFAlbumController.m in Sources */,
 			);

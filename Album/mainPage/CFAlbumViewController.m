@@ -29,8 +29,6 @@
 - (void)loadView
 {
     CGRect  rect = [UIScreen mainScreen].bounds;
-    // ???:如何动态获取导航栏高度?必须用固定值?
-    rect.size.height -= 64;
     
     CFAlbumView * albumView = [[CFAlbumView alloc] initWithFrame: rect];
     albumView.delegate = self;
@@ -46,6 +44,7 @@
     // Do any additional setup after loading the view
     self.navigationItem.title = @"相册";
     // ???: 应该使用自定义的ImageView,可以同时存储图片对象和图片名称.
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,13 +68,11 @@
 
 - (void) handlePageControlAction:(UIPageControl *)pageControl
 {
-    // 获取相册对象
-    
     // 计算需要的内容偏移量.
-    CGPoint contentOffset = CGPointMake((pageControl.currentPage) * (self.view.frame.size.width),self.view.contentOffset.y);
+    CGPoint contentOffset = CGPointMake((pageControl.currentPage) * (self.view.frame.size.width),self.view.albumSV.contentOffset.y);
     
     // 设置相册的偏移,使需要的图片显示出来.
-    [self.view setContentOffset:contentOffset animated: YES];
+    [self.view.albumSV setContentOffset:contentOffset animated: YES];
     
 }
 
@@ -97,12 +94,13 @@
     NSArray * indexes;
     
     // 考虑往左过度偏移的情况
-    if (self.view.contentOffset.x < 0) {
+    // ???:类似与视图紧密相关的逻辑,都放到控制器,真的合适?
+    if (self.view.albumSV.contentOffset.x < 0) {
         indexes = @[[NSNumber numberWithInteger:0]];
         return indexes;
     }
     
-    CGFloat value =  self.view.contentOffset.x / self.view.frame.size.width;
+    CGFloat value =  self.view.albumSV.contentOffset.x / self.view.frame.size.width;
     
     // 向上取整,
     NSInteger up = ceil(value);
@@ -120,13 +118,17 @@
     return indexes;
 }
 
-- (void)scrollViewDidScroll:(CFAlbumView *) album
+- (void)scrollViewDidScroll:(UIScrollView *) scrollView
 {
+    // ???:考虑零张图片的特殊情况!
+    // ???:pageControll  单张图片或者无图片时,不显示.
+    
     // 触发这个事件的也可能是放置单张相片的UIScrollView
     // ???:有必要考虑这种情况吗?
-    if ( ! [album isKindOfClass: [CFAlbumView class]]) {
-        return;
-    }
+    // ???:为什么不支持缩放了?
+//    if ( ! [album isKindOfClass: [CFAlbumView class]]) {
+//        return;
+//    }
     
     // 修改lable的提示信息
     // 计算图片总数量
@@ -146,23 +148,20 @@
     
     // 要在label显示的提示信息
     NSString * info = [[[NSString alloc] initWithFormat:@"正在显示页数 %lu / %lu", curNum + 1, sum] autorelease];
-    
+    //???:临时测试代码
+    [self.view.photoViews enumerateObjectsUsingBlock:^(CFPhotoView * obj, NSUInteger idx, BOOL *stop) {
+        CGRect rect = obj.frame;
+        int a = 0;
+    }];
     // 设置图片
     [self setPhotoAtIndex: curNum];
     
-    // ???:不建议相册视图直接继承自UIScrollView.这样,label和pageControl边框就不要动态调整了!
     // 设置lable
-    album.label.text = info;
-    CGRect rectOfLabel = album.label.frame;
-    rectOfLabel.origin.x = self.view.contentOffset.x;
-    album.label.frame = rectOfLabel;
+    self.view.label.text = info;
     
     // 修改pageControl的值
-    album.pageControl.currentPage = curNum;
-    CGRect rectOfPageControl = album.pageControl.frame;
-    rectOfPageControl.origin.x = self.view.contentOffset.x;
-    album.pageControl.frame = rectOfPageControl;
-    [album.pageControl updateCurrentPageDisplay];
+    self.view.pageControl.currentPage = curNum;
+    [self.view.pageControl updateCurrentPageDisplay];
 }
 
 - (void) setPhotoAtIndex: (NSUInteger) index

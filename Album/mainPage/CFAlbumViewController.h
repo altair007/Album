@@ -16,16 +16,6 @@
 @property (retain, nonatomic) CFAlbumView * view; //!< 相册
 
 /**
- *  获取相册指定位置上的图片视图.
- *
- *  @param albumView        相册.
- *  @param photoNameAtIndex 相册的指定位置.
- *
- *  @return 图片视图.
- */
-- (CFPhotoView *)albumView:(CFAlbumView *)albumView photoAtIndex:(NSUInteger) index;
-
-/**
  *  设置相册指定位置上的照片.
  *
  *  @param index 指定的相册位置.

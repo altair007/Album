@@ -10,11 +10,14 @@
 #import "CFAlbumViewController.h"
 #import "CFAlbumController.h"
 #import "CFPhotoView.h"
+#import "CFPhotoContainerView.h"
 
 @interface CFAlbumView ()
 @property (retain, nonatomic, readwrite) NSMutableArray * photoViews; //!< 存储相片视图的数组.
 @property (retain, nonatomic, readwrite) UIPageControl * pageControl; //!< 页面控制
 @property (retain, nonatomic, readwrite) UILabel * label; //!< 信息提示
+@property (retain, nonatomic, readwrite) UIScrollView * albumSV; //!< 相册主视图
+@property (retain ,nonatomic, readwrite) CFPhotoContainerView * photoCV; //!< 照片容器视图.
 @end
 
 @implementation CFAlbumView
@@ -24,6 +27,7 @@
     self.photoViews = nil;
     self.pageControl = nil;
     self.label = nil;
+    self.albumSV= nil;
     
     [super dealloc];
 }
@@ -41,102 +45,124 @@
 
 - (void) setupSubviews
 {
-    // 设置分页效果
-    self.pagingEnabled = YES;
+//    /* 设置相册的主视图 */
+//    CGRect rectOfalbumSV = CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height);
+//    
+//    UIScrollView * albumSV = [[UIScrollView alloc] initWithFrame: rectOfalbumSV];
+//    // 设置分页效果
+//    albumSV.pagingEnabled = YES;
+//    
+//    // 不允许同时进行水平和竖直方向上的滚动.
+//    albumSV.directionalLockEnabled = YES;
+//    
+//    self.albumSV = albumSV;
+//    [albumSV release];
+//    
+//    
+//    [self addSubview: self.albumSV];
+//    [self sendSubviewToBack: self.albumSV];
+    // ???:多层级视图,共用一个控制器,合适吗?逻辑嵌套过深,有什么好的解决方案吗?
+    /* 设置相片容器 */
+    CFPhotoContainerView * photoCV = [[CFPhotoContainerView alloc] initWithFrame:self.frame];
+    self.photoCV = photoCV;
+    [photoCV release];
     
-    // 不允许同时进行水平和竖直方向上的滚动.
-    self.directionalLockEnabled = YES;
-    
-    // 创建支持页面切换的控件.
-    self.pageControl = [[[UIPageControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height * 0.95, self.frame.size.width, self.frame.size.height * 0.05)] autorelease];
+    /* 创建支持页面切换的控件. */
+    UIPageControl * pageC = [[[UIPageControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height * 0.95, self.frame.size.width, self.frame.size.height * 0.05)] autorelease];
     
     // 设置背景颜色
-    self.pageControl.backgroundColor = [UIColor grayColor];
+    pageC.backgroundColor = [UIColor grayColor];
     
     // 设置透明度
-    self.pageControl.alpha = 0.3;
+    pageC.alpha = 0.3;
     
     // 设置分页指示器颜色
-    self.pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
-    self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+    pageC.currentPageIndicatorTintColor = [UIColor blackColor];
+    pageC.pageIndicatorTintColor = [UIColor whiteColor];
     
     // 设置何时显示当前页(圆点)
-    self.pageControl.defersCurrentPageDisplay = YES;
+    pageC.defersCurrentPageDisplay = YES;
     
     // 添加响应方法
-    [self.pageControl addTarget:[CFAlbumController sharedInstance].albumVC action:@selector(handlePageControlAction:) forControlEvents: UIControlEventValueChanged];
+    [pageC addTarget:[CFAlbumController sharedInstance].albumVC action:@selector(handlePageControlAction:) forControlEvents: UIControlEventValueChanged];
     
-    [self addSubview: self.pageControl];
+    self.pageControl = pageC;
+    [pageC release];
     
-    // 添加lable,显示相册信息.
-    self.label = [[[UILabel alloc] initWithFrame:CGRectMake( 0, 0, self.frame.size.width * 0.3, self.frame.size.height * 0.05)] autorelease];
+    /* 设置用于显示相册信息的label */
+    // FIXEME:64明显不是最优值!
+    UILabel * label = [[[UILabel alloc] initWithFrame:CGRectMake( 0, 64, self.frame.size.width * 0.3, self.frame.size.height * 0.05)] autorelease];
     
-    // 设置文本自适应
-    self.label.adjustsFontSizeToFitWidth = YES;
+    label.adjustsFontSizeToFitWidth = YES;
+    label.textColor = [UIColor blackColor];
     
-    // 设置颜色.
-    self.label.textColor = [UIColor redColor];
-    
-    [self addSubview: self.label];
+    self.label = label;
+    [label release];
 }
+
 - (void)setNamesOfPhotos:(NSArray *)namesOfPhotos
 {
-    // 设置属性
-    [namesOfPhotos retain];
-    [_namesOfPhotos release];
-    _namesOfPhotos = namesOfPhotos;
-    
-    // 设置内容偏移量
-    self.contentSize = CGSizeMake(self.frame.size.width * self.namesOfPhotos.count, self.frame.size.height);
+    // 直接用此数据设置相册容器
+    self.photoCV.namesOfPhotos = namesOfPhotos;
     
     // 设置页面控制器的页数.
     self.pageControl.numberOfPages = self.namesOfPhotos.count;
-    
-    // 设置label的文本显示.
-    self.label.text = [[[NSString alloc]initWithFormat:@"当前正在显示 %ld/%ld", (NSUInteger)(self.contentOffset.x / self.frame.size.width), self.namesOfPhotos.count] autorelease];
+}
+
+-(NSArray *)namesOfPhotos
+{
+    return self.photoCV.namesOfPhotos;
 }
 
 - (void)setDelegate:(id<UIScrollViewDelegate>)delegate
 {
-    [super setDelegate: delegate];
-    
-    [self.photoViews enumerateObjectsUsingBlock:^(CFPhotoView * obj, NSUInteger idx, BOOL *stop) {
-        obj.delegate = self.delegate;
-    }];
+    self.photoCV.delegate = delegate;
+}
+
+- (id<UIScrollViewDelegate>)delegate
+{
+    return self.photoCV.delegate;
 }
 
 - (CFPhotoView *) dequeueReusablePhotoView
 {
+    CFPhotoView * result = [self.photoCV dequeueReusablePhotoView];
 
-    if (nil == self.photoViews) {
-        self.photoViews = [[[NSMutableArray alloc] initWithCapacity: 42] autorelease];
-    }
-    
-    __block CFPhotoView * result = nil;
-    
-    [self.photoViews enumerateObjectsUsingBlock:^(CFPhotoView * obj, NSUInteger idx, BOOL *stop) {
-        CGFloat a = obj.frame.origin.x;
-        CGFloat b = self.contentOffset.x - self.frame.size.width;
-        CGFloat c = self.contentOffset.x + self.frame.size.width;
-        if (obj.frame.origin.x < self.contentOffset.x - self.frame.size.width ||
-            obj.frame.origin.x > self.contentOffset.x + self.frame.size.width) {
-            result = obj;
-            * stop = YES;
-        }
-    }];
-
-    if (nil == result) {
-        CGRect rect = [UIScreen mainScreen].bounds;
-        result = [[[CFPhotoView alloc] initWithFrame:rect] autorelease];
-        [self.photoViews addObject: result];
-    }
-    
-    if (NO == [self.subviews containsObject: result]) {
-        [self addSubview: result];
-        [self sendSubviewToBack: result];
-    }
-    // !!!:临时添加输出对象地址,来判断是否是同一对象
-    NSLog(@"%p", result);
     return result;
+}
+
+-(void)setPhotoCV:(CFPhotoContainerView *)photoCV
+{
+    [photoCV retain];
+    [_photoCV release];
+    _photoCV = photoCV;
+    
+    if (NO == [self.subviews containsObject: _photoCV]) {
+        [self addSubview: _photoCV];
+        // ???:验证一下,nil添加作为子视图,会不会出错.
+        [self addSubview: nil];
+    }
+}
+
+-(void)setPageControl:(UIPageControl *)pageControl
+{
+    [pageControl retain];
+    [_pageControl release];
+    _pageControl = pageControl;
+    
+    if (NO == [self.subviews containsObject: _pageControl]) {
+        [self addSubview: _pageControl];
+    }
+}
+
+- (void)setLabel:(UILabel *)label
+{
+    [label retain];
+    [_label release];
+    _label = label;
+    
+    if (NO == [self.subviews containsObject: _label]) {
+        [self addSubview: _label];
+    }
 }
 @end
