@@ -1,5 +1,5 @@
 //
-//  CFPhotoContainerView.h
+//  CFAlbumViewDataSource.h
 //  Album
 //
 //  Created by   颜风 on 14-6-15.

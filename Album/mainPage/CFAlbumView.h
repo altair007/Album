@@ -8,13 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CFAlbumViewDataSource.h"
+#import "CFAlbumViewDelegate.h"
+#import "CFAlbumViewDataSource.h"
+
 @class CFPhotoViewCell;
 @class CFPhotoContainerView;
-
-/**
- *  相册代理的别名.
- */
-typedef id<UIScrollViewDelegate, CFAlbumViewDataSource> CFAlbumViewDelegate;
 
 /**
  *  相册类视图
@@ -22,9 +20,10 @@ typedef id<UIScrollViewDelegate, CFAlbumViewDataSource> CFAlbumViewDelegate;
 @interface CFAlbumView : UIView
 
 #pragma mark -属性
-@property (assign, nonatomic) CFAlbumViewDelegate delegate; //!< 相册代理.
+@property (assign, nonatomic) id<CFAlbumViewDelegate>  delegate; //!< 相册代理.
+@property (assign, nonatomic) id<CFAlbumViewDataSource> dataSource; //!< 数据源代理.
 @property (retain, nonatomic, readonly) UIPageControl * pageControl; //!< 页面控制
-@property (retain, nonatomic, readonly) UILabel * label; //!< 信息提示
+@property (retain, nonatomic, readonly) UILabel * infoLabel; //!< 信息提示
 @property (retain ,nonatomic, readonly) CFPhotoContainerView * photoCV; //!< 照片容器视图.
 @property (retain, nonatomic, readonly) NSMutableDictionary * photoViews; //!< 存储已经存在的照片视图,以位置为键,视图对象为值.
 // ???:最后统一更新下各个类的dealloc.
@@ -65,5 +64,12 @@ typedef id<UIScrollViewDelegate, CFAlbumViewDataSource> CFAlbumViewDelegate;
  *  @return 所有应当被用户看到的图片的位置
  */
 - (NSArray *) latestIndexesForVisiblePhotoViews;
+
+/**
+ *  获取相册中照片总数.
+ *
+ *  @return 相册中照片总数.
+ */
+- (NSUInteger) numberOfPhotos;
 
 @end

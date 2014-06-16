@@ -12,6 +12,13 @@
 @property (retain, nonatomic, readwrite) UIImageView * imageView; //!< 用于放置图片.
 @end
 @implementation CFPhotoViewCell
+-(void)dealloc
+{
+    self.nameOfPhoto = nil;
+    self.imageView = nil;
+    
+    [super dealloc];
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -60,4 +67,18 @@
     [self.imageView addGestureRecognizer: recognizer];
 }
 
+-(void)setFrame:(CGRect)frame
+{
+    [super setFrame: frame];
+    
+    /* 其他设置 */
+    self.imageView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+}
+
+- (void) prepareForReuseWithFrame: (CGRect) frame;
+{
+    // ???:为什么重新设置之后,不再支持缩放了?缩放后无法复原!
+    self.frame = frame;
+//    self.imageView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+}
 @end

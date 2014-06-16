@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CFPhotoInfoViewController : UIViewController
+// ???:感觉这个属性没必要!
 @property (copy ,nonatomic) NSString * title; //!< 标题
 
 @end

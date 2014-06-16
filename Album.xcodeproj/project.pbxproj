@@ -52,7 +52,7 @@
 /* Begin PBXFileReference section */
 		C215AAF3194D5659008B60A1 /* CFPhotoContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoContainerView.h; sourceTree = "<group>"; };
 		C215AAF4194D5659008B60A1 /* CFPhotoContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFPhotoContainerView.m; sourceTree = "<group>"; };
-		C215AAF6194D7EA1008B60A1 /* CFPhotoContainerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoContainerViewDelegate.h; sourceTree = "<group>"; };
+		C215AAF6194D7EA1008B60A1 /* CFAlbumViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAlbumViewDelegate.h; sourceTree = "<group>"; };
 		C215AAF7194D7EF4008B60A1 /* CFAlbumViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAlbumViewDataSource.h; sourceTree = "<group>"; };
 		C2218D8B194C2BC000CD7BE7 /* CFPhotoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoViewCell.h; sourceTree = "<group>"; };
 		C2218D8C194C2BC000CD7BE7 /* CFPhotoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFPhotoViewCell.m; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 				C2344746194C0C0F00B32839 /* CFPhotoInfoViewController.m */,
 				C215AAF3194D5659008B60A1 /* CFPhotoContainerView.h */,
 				C215AAF4194D5659008B60A1 /* CFPhotoContainerView.m */,
-				C215AAF6194D7EA1008B60A1 /* CFPhotoContainerViewDelegate.h */,
+				C215AAF6194D7EA1008B60A1 /* CFAlbumViewDelegate.h */,
 				C215AAF7194D7EF4008B60A1 /* CFAlbumViewDataSource.h */,
 			);
 			path = mainPage;

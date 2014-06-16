@@ -16,5 +16,16 @@ typedef id<UIScrollViewDelegate> CFPhotoViewCellDelegate;
 @property (copy ,nonatomic) NSString * nameOfPhoto; //!< 相片名称.
 @property (retain, nonatomic, readonly) UIImageView * imageView; //!< 用于放置图片.
 
+/**
+ *  设置子视图.
+ */
 - (void) setupSubviews;
+
+/**
+ *  为复用做准备.
+ *
+ *  @param frame 边框值.
+ */
+- (void) prepareForReuseWithFrame: (CGRect) frame;
+
 @end

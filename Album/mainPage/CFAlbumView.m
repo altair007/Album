@@ -14,7 +14,7 @@
 
 @interface CFAlbumView ()
 @property (retain, nonatomic, readwrite) UIPageControl * pageControl; //!< 页面控制
-@property (retain, nonatomic, readwrite) UILabel * label; //!< 信息提示
+@property (retain, nonatomic, readwrite) UILabel * infoLabel; //!< 信息提示
 @property (retain ,nonatomic, readwrite) CFPhotoContainerView * photoCV; //!< 照片容器视图.
 @property (retain, nonatomic, readwrite) NSMutableDictionary * photoViews; //!< 存储已经存在的照片视图,以位置为键,视图对象为值.
 
@@ -24,7 +24,9 @@
 - (void)dealloc
 {
     self.pageControl = nil;
-    self.label = nil;
+    self.infoLabel = nil;
+    self.photoCV = nil;
+    self.photoViews = nil;
     
     [super dealloc];
 }
@@ -56,12 +58,17 @@
     // 设置透明度
     pageC.alpha = 0.3;
     
+    // 当只有一张图片时,隐藏此控件.
+    pageC.hidesForSinglePage = YES;
+    
     // 设置分页指示器颜色
     pageC.currentPageIndicatorTintColor = [UIColor blackColor];
     pageC.pageIndicatorTintColor = [UIColor whiteColor];
     
     // 设置何时显示当前页(圆点)
     pageC.defersCurrentPageDisplay = YES;
+    
+    
     
     // 添加响应方法
     [pageC addTarget:[CFAlbumController sharedInstance].albumVC action:@selector(handlePageControlAction:) forControlEvents: UIControlEventValueChanged];
@@ -76,24 +83,28 @@
     label.adjustsFontSizeToFitWidth = YES;
     label.textColor = [UIColor blackColor];
     
-    self.label = label;
+    self.infoLabel = label;
     [label release];
 }
 
-- (void)setDelegate:(CFAlbumViewDelegate) delegate
+- (void)setDelegate: (id<CFAlbumViewDelegate>) delegate
 {
     // 设置代理
-    [delegate retain];
-    [_delegate release];
     _delegate = delegate;
     
+    /* 额外的操作 */
+    // 设置相册容器的代理
+    self.photoCV.delegate = self.delegate;
+}
+
+- (void)setDataSource:(id<CFAlbumViewDataSource>)dataSource
+{
+    // 设置数据源代理
+    _dataSource = dataSource;
     
     /* 额外的操作 */
-    
-    self.photoCV.delegate = self.delegate;
-    
     // 通过代理获取相册图片总数
-    NSUInteger numberOfPhotos = [self.delegate numberOfPhotosInAlbumView:self];
+    NSUInteger numberOfPhotos = [self.dataSource numberOfPhotosInAlbumView:self];
     
     // 设置相册容器的内容偏移量
     self.photoCV.contentSize = CGSizeMake(self.frame.size.width * numberOfPhotos, self.frame.size.height);
@@ -119,8 +130,11 @@
             *stop = YES;
         }
     }];
-    
-    result.frame = CGRectMake(index * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
+
+    CGRect rect = CGRectMake(index * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
+    [result prepareForReuseWithFrame:rect];
+//    CGRect rect = result.frame;
+//    CGRect rect2 = result.imageView.frame;
     
     return result;
 }
@@ -133,8 +147,6 @@
     
     if (NO == [self.subviews containsObject: _photoCV]) {
         [self addSubview: _photoCV];
-        // ???:验证一下,nil添加作为子视图,会不会出错.
-        [self addSubview: nil];
     }
 }
 
@@ -149,50 +161,37 @@
     }
 }
 
-- (void)setLabel:(UILabel *)label
+- (void)setInfoLabel:(UILabel *)label
 {
     [label retain];
-    [_label release];
-    _label = label;
+    [_infoLabel release];
+    _infoLabel = label;
     
-    if (NO == [self.subviews containsObject: _label]) {
-        [self addSubview: _label];
+    if (NO == [self.subviews containsObject: _infoLabel]) {
+        [self addSubview: _infoLabel];
     }
 }
 
 - (NSRange) latestRangeForVisiblePhotoViews
 {
-    // !!!:迭代到这里@
-    // ???:在这里初始化,真的有意义吗?要不直接null?
-    NSRange range = NSMakeRange(0, 1);
+    NSRange range = NSMakeRange(0, 0);
     
-    
-    // !!!:实现轮转的思路.
-    // !!!:下面两种情况,真的可以通过self.photoCV.contentOffset.x显现,应该是通过boudce值吧?可以的!
-    // !!!考虑往左过度偏移的情况
-    if (self.photoCV.contentOffset.x < 0) {
-        NSLog(@"x: %f,",self.photoCV.contentOffset.x);
-        // ???:逻辑错误,直接返回(0,1)不具有通用性!
-        return range;
-    }
-    
-    // !!!:向右过度偏移的情况
-    if (self.photoCV.contentOffset.x > self.photoCV.contentSize.width) {
-        NSLog(@"x: %f,",self.photoCV.contentOffset.x);
-    }
-    
-    // ???:此处应该通过代理动态获取图片宽度.
-    CGFloat widthOfImg = self.photoCV.frame.size.width;
+    // 获取图片宽度.
+    CGFloat widthOfImg = [self.delegate widthForPhotoInAlbumView: self];
     
     // 计算最左侧显示的图片是第几张图片.
     CGFloat leftOriginal = self.photoCV.contentOffset.x / widthOfImg;
+    
+    if (self.photoCV.contentOffset.x < 0) { // 往左过度偏移.
+        leftOriginal = 0.0;
+    }
+    
     NSUInteger leftIndex = floor(leftOriginal);
     
     // 计算最右侧显示的是第几张图片.
     CGFloat rightOriginal = (self.photoCV.contentOffset.x + self.photoCV.frame.size.width) / widthOfImg;
     
-    // !!!:当self.photoCV.contentOffset.x + self.photoCV.frame.size.width > self.photoCV.contentSize.width即拖动到图片末尾时,此时会多计算一个图片.此处暂时作为BUG进行修复,但结合取余操作,这里应该会成为一个实现"轮转"的捷径!
-    if (self.photoCV.contentOffset.x + self.photoCV.frame.size.width > self.photoCV.contentSize.width) {
+    if (self.photoCV.contentOffset.x + self.photoCV.frame.size.width > self.photoCV.contentSize.width) { // 往右过度偏移.
         rightOriginal = self.photoCV.contentSize.width / widthOfImg;
     }
     
@@ -212,14 +211,30 @@
 
 - (void) showPhotoViewAtIndex: (NSUInteger) index
 {
-    CFPhotoViewCell * photoView = [self.delegate albumView:self photoAtIndex: index];
+    /*  设置信息栏和页面控制器. */
+    NSString * info = [[NSString alloc] initWithFormat:@"正在显示页数 %lu / %lu", index + 1, [self numberOfPhotos]];
+    
+    self.infoLabel.text = info;
+    [info release];
+    
+    self.pageControl.currentPage = index;
+    [self.pageControl updateCurrentPageDisplay];
+    
+    /* 显示指定位置的图片 */
+    if (nil != [self.photoViews objectForKey: [NSNumber numberWithInteger:index]]) { // 此位置上图片已经显示,则直接返回.
+        return;
+    }
+    
+    CFPhotoViewCell * photoView = [self.dataSource albumView:self photoAtIndex: index];
     
     if (nil == photoView) { // 代理无法正确给出指定位置上应有的照片视图,直接返回.
         return;
     }
+
+    // ???:感觉这里,非常不妥.代理的代理,隐式定义代理,非常不妥.
+    // 给照片视图设置代理,以支持拖放等操作.
+    photoView.delegate = self.delegate;
     
-    // ???:需要考虑,此键已经存在的情况吗?
-    // ???:下面的,封装一下更好吧.
     if (nil == self.photoViews) {
         NSMutableDictionary * photoViews = [[NSMutableDictionary alloc] initWithCapacity: 42];
         self.photoViews = photoViews;
@@ -233,20 +248,38 @@
     NSLog(@"%p", photoView);
     
     [self.photoViews setObject:photoView forKey:[NSNumber numberWithInteger: index]];
+    
+//    /*  设置信息栏和页面控制器. */
+//    NSString * info = [[NSString alloc] initWithFormat:@"正在显示页数 %lu / %lu", index + 1, [self numberOfPhotos]];
+//    
+//    self.infoLabel.text = info;
+//    [info release];
+//    
+//    self.pageControl.currentPage = index;
+//    [self.pageControl updateCurrentPageDisplay];
 }
 
 - (NSArray *) latestIndexesForVisiblePhotoViews
 {
-    // ???:逻辑有点乱,冗余.
-    NSMutableArray * indexes = [[NSMutableArray alloc] initWithCapacity:42];
     NSRange range = [self latestRangeForVisiblePhotoViews];
+    
+    if (0 == range.length) { // 没有图片应当被显示.
+        return nil;
+    }
+    
+    NSMutableArray * indexes = [[NSMutableArray alloc] initWithCapacity:range.length];
     for (NSUInteger i = range.location, j = 0; j < range.length; j ++) {
+        
         [indexes addObject:[NSNumber numberWithInteger:(i + j)]];
     }
     
-    // ???:[nil count]值是零?
-    // ???:indexes长度为0时,直接返回nil?
-    
     return indexes;
+}
+
+- (NSUInteger) numberOfPhotos
+{
+    NSUInteger number = [self.dataSource numberOfPhotosInAlbumView:self];
+    
+    return number;
 }
 @end

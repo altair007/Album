@@ -12,6 +12,12 @@
  *  相册模型类
  */
 @interface CFAlbumModel : NSObject
-@property (retain, nonatomic, readonly) NSMutableArray * namesOfPhotos; //!< 存储所有相片的名称
+
+/**
+ *  获取所有图片的名称
+ *
+ *  @return 所有图片的名称组成的数组.
+ */
+- (NSArray *) namesOfPhotos;
 
 @end
