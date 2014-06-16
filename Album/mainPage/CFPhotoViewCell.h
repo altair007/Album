@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef id<UIScrollViewDelegate> CFPhotoViewCellDelegate;
 /**
  *  照片视图,用于展示单张照片
  */
-@interface CFPhotoView : UIScrollView
+@interface CFPhotoViewCell : UIScrollView
 @property (copy ,nonatomic) NSString * nameOfPhoto; //!< 相片名称.
 @property (retain, nonatomic, readonly) UIImageView * imageView; //!< 用于放置图片.
 

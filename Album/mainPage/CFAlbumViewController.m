@@ -9,7 +9,7 @@
 #import "CFAlbumViewController.h"
 #import "CFAlbumController.h"
 #import "CFPhotoInfoViewController.h"
-#import "CFPhotoView.h"
+#import "CFPhotoViewCell.h"
 #import "CFPhotoContainerView.h"
 
 @interface CFAlbumViewController ()
@@ -33,7 +33,6 @@
     
     CFAlbumView * albumView = [[CFAlbumView alloc] initWithFrame: rect];
     albumView.delegate = self;
-    albumView.namesOfPhotos = [CFAlbumController sharedInstance].namesOfPhotos;
     
     self.view = albumView;
     [albumView release];
@@ -44,7 +43,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view
     self.navigationItem.title = @"相册";
-    // ???: 应该使用自定义的ImageView,可以同时存储图片对象和图片名称.
     
 }
 
@@ -96,7 +94,6 @@
     NSArray * indexes;
     
     // 考虑往左过度偏移的情况
-    // ???:类似与视图紧密相关的逻辑,都放到控制器,真的合适?
     if (self.view.photoCV.contentOffset.x < 0) {
         indexes = @[[NSNumber numberWithInteger:0]];
         return indexes;
@@ -137,16 +134,11 @@
     NSUInteger sum = [self numberOfPhotos];
     
     // 计算当前是第几张图片,从零开始计数
-    NSMutableArray * indexes = [[NSMutableArray alloc] initWithCapacity:42];
-    NSRange range = [self.view latestRangeForVisiblePhotoViews];
-    for (NSUInteger i = range.location, j = 0; j < range.length; j ++) {
-        [indexes addObject:[NSNumber numberWithInteger:(i + j)]];
-    }
+    NSArray * indexes = [self.view latestIndexesForVisiblePhotoViews];
     
-    // !!!:从这里开始有序迭代吧!
     if (indexes.count > 1) { // 说明正在滑动
         [indexes enumerateObjectsUsingBlock:^(NSNumber * obj, NSUInteger idx, BOOL *stop) {
-            [self setPhotoAtIndex: [obj integerValue]];
+            [self.view showPhotoViewAtIndex: [obj integerValue]];
         }];
         return;
     }
@@ -157,39 +149,45 @@
     NSString * info = [[[NSString alloc] initWithFormat:@"正在显示页数 %lu / %lu", curNum + 1, sum] autorelease];
 
     // 设置图片
-    [self setPhotoAtIndex: curNum];
+    [self.view showPhotoViewAtIndex: curNum];
     
     // 设置lable
     self.view.label.text = info;
     
-    // 修改pageControl的值
+    // 修改pageControl的值.
     // ???:滑动速度过快时,pageControl无法总是同步更新.
     // ???:可能的解决策略:把此步的相关方法封装为一个方法,在加速或者减速时也调用.
     self.view.pageControl.currentPage = curNum;
     [self.view.pageControl updateCurrentPageDisplay];
 }
 
-- (void) setPhotoAtIndex: (NSUInteger) index
+- (CFPhotoViewCell *) albumView: (CFAlbumView *) albumView
+               photoAtIndex: (NSUInteger) index
 {
+    // ???:以下两步可以省,但是逻辑必须在其他步中体现.
+    // ???:省略后,可能引起最后一个视图后直接出现窗口.
+    // ???:可以使用两个大的ScrollView模仿轮转.
     // 是否有有效的位置?
     if (index >= [self numberOfPhotos]) {
-        return;
-    }
-    
-    // 先判断此位置上是否已经有照片,已经有,则直接返回.
-    if (YES == [self isHasPhotoAtIndex: index]) {
-        return;
+        return nil;
     }
     
     // 获取此位置图片的名称.
     NSString * nameOfPhoto = [self photoNameAtIndex: index];
     
     // 获取照片视图.
-    CFPhotoView * photoView = [self.view dequeueReusablePhotoViewAtIndex:index];
+    CFPhotoViewCell * photoView = [self.view dequeueReusablePhotoViewAtIndex:index];
+    
+    if (nil == photoView) {
+        photoView = [[CFPhotoViewCell alloc] initWithFrame:CGRectMake(index * self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//        多余的?
+//        [photoView autorelease];
+    }
     
     // 设置照片视图属性.
     photoView.nameOfPhoto = nameOfPhoto;
-    photoView.frame = CGRectMake(index * self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height);
+    
+    return photoView;
 }
 
 - (NSString *)photoNameAtIndex:(NSUInteger)index
@@ -205,23 +203,6 @@
     return nameOfPhoto;
 }
 
-- (BOOL)isHasPhotoAtIndex: (NSUInteger) index
-{
-    __block BOOL result = NO;
-    
-    // 先获取的此位置对应的横向偏移坐标
-    CGFloat x = index * self.view.photoCV.frame.size.width;
-    
-    // 判断已经存在的照片视图中是否已经有位于此位置的
-    [self.view.photoCV.photoViews enumerateObjectsUsingBlock:^(CFPhotoView * obj, NSUInteger idx, BOOL *stop) {
-        if (x == obj.frame.origin.x) {
-            result = YES;
-            * stop = YES;
-        }
-    }];
-    
-    return result;
-}
 // any zoom scale changes
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView NS_AVAILABLE_IOS(3_2)
 {
@@ -289,20 +270,6 @@
     NSUInteger result = [[[CFAlbumController sharedInstance] namesOfPhotos] count];
     
     return result;
-}
-
-- (CFPhotoView *) albumView: (CFAlbumView *) albumView
-               photoAtIndex: (NSUInteger) index
-{
-    CFPhotoView * photoView = nil;
-    
-    // FIXME:可变数组,应该由PhotoView类持有!
-    photoView = [albumView dequeueReusablePhotoViewAtIndex: index];
-    
-//    if (<#condition#>) {
-//        <#statements#>
-//    }
-    return nil;
 }
 
 @end

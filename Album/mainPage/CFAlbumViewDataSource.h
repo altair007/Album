@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class CFAlbumView;
-@class CFPhotoView;
+@class CFPhotoViewCell;
 
 @protocol CFAlbumViewDataSource <NSObject>
 @required
@@ -32,7 +32,7 @@
  *
  *  @return 返回相册中指定位置的图片视图.
  */
-- (CFPhotoView *) albumView: (CFAlbumView *) albumView
+- (CFPhotoViewCell *) albumView: (CFAlbumView *) albumView
                photoAtIndex: (NSUInteger) index;
 
 @end

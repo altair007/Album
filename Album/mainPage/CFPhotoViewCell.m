@@ -6,13 +6,12 @@
 //  Copyright (c) 2014年 Shadow. All rights reserved.
 //
 
-#import "CFPhotoView.h"
+#import "CFPhotoViewCell.h"
 
-// ???:命名为cell是不是更合适?
-@interface CFPhotoView ()
+@interface CFPhotoViewCell ()
 @property (retain, nonatomic, readwrite) UIImageView * imageView; //!< 用于放置图片.
 @end
-@implementation CFPhotoView
+@implementation CFPhotoViewCell
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -27,9 +26,6 @@
 
 - (void)setupSubviews
 {
-    // FIXME:临时添加,背景色
-    self.backgroundColor = [UIColor redColor];
-    
     // 设置最大和最小缩放比
     self.minimumZoomScale = 0.5;
     self.maximumZoomScale = 3.0;
@@ -52,16 +48,14 @@
 
     // 设置相片
     self.imageView.image = [UIImage imageNamed: nameOfPhoto];
-    NSArray * arr = self.subviews;
-    UIImage * image = self.imageView.image;
 }
 
-- (void)setDelegate:(id<UIScrollViewDelegate>)delegate
+- (void)setDelegate:(CFPhotoViewCellDelegate) delegate
 {
     [super setDelegate:delegate];
     
     // 添加触摸手势,点击显示详情!
-    // ???:这种警告,应该使用什么策略清除
+    // ???:这种警告,应该使用什么策略清除.我感觉位置就有些不合适.
     UITapGestureRecognizer * recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.delegate action:@selector(tapGesture:)];
     [self.imageView addGestureRecognizer: recognizer];
 }
