@@ -26,7 +26,6 @@
 @property (retain, nonatomic, readonly) UILabel * infoLabel; //!< 信息提示
 @property (retain ,nonatomic, readonly) CFPhotoContainerView * photoCV; //!< 照片容器视图.
 @property (retain, nonatomic, readonly) NSMutableDictionary * photoViews; //!< 存储已经存在的照片视图,以位置为键,视图对象为值.
-// ???:最后统一更新下各个类的dealloc.
 @property (assign, nonatomic, readonly) NSRange rangeForVisiblePhotoViews; //!< 可见的照片视图的范围,以在照片在相册中的相对位置为单位进行度量.
 /**
  *  设置子视图.

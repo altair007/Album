@@ -27,25 +27,26 @@
     self.window.backgroundColor = [UIColor greenColor];
     
     // 初始化主控制器
-    CFAlbumViewController * albumVC = [[CFAlbumViewController alloc] init];
-    CFAlbumModel * albumModel = [[CFAlbumModel alloc] init];
-    
     CFAlbumController * sharedInstance = [CFAlbumController sharedInstance];
     
+    CFAlbumViewController * albumVC = [[CFAlbumViewController alloc] init];
     sharedInstance.albumVC = albumVC;
     [albumVC release];
     
-    sharedInstance.albumModel = albumModel;
-    [albumModel release];
-    
+    // ???:自动释放,好吗?
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:sharedInstance.albumVC];
     
-    self.window.rootViewController = navController;
-    [navController release];
-    
-    [self.window makeKeyAndVisible];
-    
-    
+    // ???:应该是无法获取图片的缘故!
+    CFAlbumModel * albumModel = [[CFAlbumModel alloc] initWithSuccessBlock:^(CFAlbumModel * albumModel) {
+        self.window.rootViewController = navController;
+        [navController release];
+        [self.window makeKeyAndVisible];
+    } failBlock:^(NSError * error) {
+    }];
+
+    sharedInstance.albumModel = albumModel;
+    [albumModel release];
+
     return YES;
 }
 

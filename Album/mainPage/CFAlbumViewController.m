@@ -111,34 +111,8 @@
     NSArray * indexes = [self.view latestIndexesForVisiblePhotoViews];
     
     [indexes enumerateObjectsUsingBlock:^(NSNumber * obj, NSUInteger idx, BOOL *stop) {
-        // ???:又出现了错误值!图片信息无效的提示!
         [self.view showPhotoViewAtIndex: [obj integerValue]];
     }];
-//    if (indexes.count > 1) { // 说明正在滑动
-//            NSLog(@"*");
-//        [indexes enumerateObjectsUsingBlock:^(NSNumber * obj, NSUInteger idx, BOOL *stop) {
-//            // ???:又出现了错误值!图片信息无效的提示!
-//            [self.view showPhotoViewAtIndex: [obj integerValue]];
-//        }];
-//        return;
-//    }
-    
-//    NSUInteger curNum = [(NSNumber *)[indexes objectAtIndex:0] integerValue];
-//    
-//    // 要在label显示的提示信息
-//    NSString * info = [[[NSString alloc] initWithFormat:@"正在显示页数 %lu / %lu", curNum + 1, sum] autorelease];
-//
-//    // 设置图片
-//    [self.view showPhotoViewAtIndex: curNum];
-//    
-//    // 设置lable
-//    self.view.infoLabel.text = info;
-//    
-//    // 修改pageControl的值.
-//    // ???:滑动速度过快时,pageControl无法总是同步更新.
-//    // ???:可能的解决策略:把此步的相关方法封装为一个方法,在加速或者减速时也调用.
-//    self.view.pageControl.currentPage = curNum;
-//    [self.view.pageControl updateCurrentPageDisplay];
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView

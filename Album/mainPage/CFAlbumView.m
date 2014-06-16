@@ -103,6 +103,7 @@
     _dataSource = dataSource;
     
     /* 额外的操作 */
+    // !!!:封装一下!
     // 通过代理获取相册图片总数
     NSUInteger numberOfPhotos = [self.dataSource numberOfPhotosInAlbumView:self];
     
@@ -133,8 +134,6 @@
 
     CGRect rect = CGRectMake(index * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
     [result prepareForReuseWithFrame:rect];
-//    CGRect rect = result.frame;
-//    CGRect rect2 = result.imageView.frame;
     
     return result;
 }
@@ -201,8 +200,13 @@
     range.location = leftIndex;
     range.length = rightIndex - leftIndex + 1;
     
-    // 考虑一种极端情况:两侧刚好是两张图片的边框,此时计算出的范围会比实际范围多一张图片.
-    if (leftIndex == leftOriginal && rightIndex == rightOriginal) {
+    /*
+     考虑两种特殊情况:
+     1.两侧刚好是图片的边框,此时计算出的范围会比实际范围多一张图片.
+     2.向右过度偏移,此时计算出的范围也会比实际范围多一张图片.
+     */
+    if ((leftIndex == leftOriginal && rightIndex == rightOriginal) ||
+        (rightOriginal == self.photoCV.contentSize.width / widthOfImg)) {
         range.length --;
     }
     
@@ -245,18 +249,9 @@
         [self.photoCV addSubview: photoView];
     }
     // !!!:临时添加输出对象地址,来判断是否是同一对象
-    NSLog(@"%p", photoView);
+    NSLog(@"%ld : %p", index,photoView);
     
     [self.photoViews setObject:photoView forKey:[NSNumber numberWithInteger: index]];
-    
-//    /*  设置信息栏和页面控制器. */
-//    NSString * info = [[NSString alloc] initWithFormat:@"正在显示页数 %lu / %lu", index + 1, [self numberOfPhotos]];
-//    
-//    self.infoLabel.text = info;
-//    [info release];
-//    
-//    self.pageControl.currentPage = index;
-//    [self.pageControl updateCurrentPageDisplay];
 }
 
 - (NSArray *) latestIndexesForVisiblePhotoViews
@@ -282,4 +277,5 @@
     
     return number;
 }
+
 @end

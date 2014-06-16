@@ -7,6 +7,7 @@
 //
 
 #import "CFPhotoViewCell.h"
+#import "UIImage+AssetUrl.h"
 
 @interface CFPhotoViewCell ()
 @property (retain, nonatomic, readwrite) UIImageView * imageView; //!< 用于放置图片.
@@ -54,7 +55,9 @@
     _nameOfPhoto = name;
 
     // 设置相片
-    self.imageView.image = [UIImage imageNamed: nameOfPhoto];
+    [UIImage imageForAssetUrl:nameOfPhoto success:^(UIImage * img) {
+        self.imageView.image = img;
+    } fail:NULL];
 }
 
 - (void)setDelegate:(CFPhotoViewCellDelegate) delegate
@@ -62,7 +65,7 @@
     [super setDelegate:delegate];
     
     // 添加触摸手势,点击显示详情!
-    // ???:这种警告,应该使用什么策略清除.我感觉位置就有些不合适.
+    // ???:这种警告,应该使用什么策略清除.我感觉位置就有些不合适.(补充代理协议)
     UITapGestureRecognizer * recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.delegate action:@selector(tapGesture:)];
     [self.imageView addGestureRecognizer: recognizer];
 }
