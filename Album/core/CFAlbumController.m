@@ -8,6 +8,8 @@
 
 #import "CFAlbumController.h"
 #import "CFAlbumModel.h"
+#import "CFPhotoInfoViewController.h"
+#import "CFAlbumViewController.h"
 
 @implementation CFAlbumController
 static CFAlbumController * sharedObj = nil; //!< 单例对象.
@@ -62,4 +64,24 @@ static CFAlbumController * sharedObj = nil; //!< 单例对象.
 {
     return self.albumModel.namesOfPhotos;
 }
+
+- (void) swithToAlbumView
+{
+    [self.photoInfoVC.navigationController popToViewController:self.albumVC animated:YES];
+}
+
+- (void) swithToPhotoInfoViewAtIndex: (NSUInteger) index
+{
+    if (nil == self.photoInfoVC) {
+        CFPhotoInfoViewController * temp = [[CFPhotoInfoViewController alloc] init];
+        self.photoInfoVC = temp;
+        [temp release];
+    }
+    
+    self.photoInfoVC.index = index;
+
+    [self.albumVC.navigationController pushViewController: self.photoInfoVC animated:YES];
+    
+}
+
 @end

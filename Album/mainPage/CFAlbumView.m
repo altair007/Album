@@ -16,7 +16,7 @@
 @property (retain, nonatomic, readwrite) UIPageControl * pageControl; //!< 页面控制
 @property (retain, nonatomic, readwrite) UILabel * infoLabel; //!< 信息提示
 @property (retain ,nonatomic, readwrite) CFPhotoContainerView * photoCV; //!< 照片容器视图.
-@property (retain, nonatomic, readwrite) NSMutableDictionary * photoViews; //!< 存储已经存在的照片视图,以位置为键,视图对象为值.
+@property (retain, nonatomic, readwrite) NSMutableDictionary * photoCells; //!< 存储已经存在的照片视图,以位置为键,视图对象为值.
 
 @end
 
@@ -26,7 +26,7 @@
     self.pageControl = nil;
     self.infoLabel = nil;
     self.photoCV = nil;
-    self.photoViews = nil;
+    self.photoCells = nil;
     
     [super dealloc];
 }
@@ -103,12 +103,20 @@
     _dataSource = dataSource;
     
     /* 额外的操作 */
-    // !!!:封装一下!
     // 通过代理获取相册图片总数
     NSUInteger numberOfPhotos = [self.dataSource numberOfPhotosInAlbumView:self];
     
     // 设置相册容器的内容偏移量
-    self.photoCV.contentSize = CGSizeMake(self.frame.size.width * numberOfPhotos, self.frame.size.height);
+    // !!!:临时删除.
+//    self.photoCV.contentSize = CGSizeMake(self.frame.size.width * numberOfPhotos, self.frame.size.height);
+    // ???: 控制器到底是在什么时机设置或者调整视图的frame的?willapperar?
+    // ???:此处的高是0?
+    CGSize size = self.photoCV.contentSize;
+    
+        self.photoCV.contentSize = CGSizeMake(self.frame.size.width * numberOfPhotos, self.photoCV.contentSize.height);
+    
+    // ???:此处的高是0?
+    size = self.photoCV.contentSize;
     
     // 设置页面控制器的页数.
     self.pageControl.numberOfPages = numberOfPhotos;
@@ -116,7 +124,7 @@
 
 - (CFPhotoViewCell *) dequeueReusablePhotoViewAtIndex: (NSUInteger) index
 {
-    __block CFPhotoViewCell * result = [self.photoViews objectForKey: [NSNumber numberWithInteger: index]];
+    __block CFPhotoViewCell * result = [self.photoCells objectForKey: [NSNumber numberWithInteger: index]];
     
     if (nil != result) { // 指定位置上的照片视图已经存在,直接返回这个视图即可.
         return result;
@@ -124,10 +132,10 @@
     
     /* 已经存在的照片视图中,有没有闲置的 */
     
-    [self.photoViews enumerateKeysAndObjectsUsingBlock:^(NSNumber * key, CFPhotoViewCell * obj, BOOL *stop) {
+    [self.photoCells enumerateKeysAndObjectsUsingBlock:^(NSNumber * key, CFPhotoViewCell * obj, BOOL *stop) {
         if (NO == [[self latestIndexesForVisiblePhotoViews] containsObject: key] ) { // 已经存在的照片视图中有闲置的
             result = obj;
-            [self.photoViews removeObjectForKey: key];
+            [self.photoCells removeObjectForKey: key];
             *stop = YES;
         }
     }];
@@ -225,7 +233,7 @@
     [self.pageControl updateCurrentPageDisplay];
     
     /* 显示指定位置的图片 */
-    if (nil != [self.photoViews objectForKey: [NSNumber numberWithInteger:index]]) { // 此位置上图片已经显示,则直接返回.
+    if (nil != [self.photoCells objectForKey: [NSNumber numberWithInteger:index]]) { // 此位置上图片已经显示,则直接返回.
         return;
     }
     
@@ -235,25 +243,42 @@
         return;
     }
 
-    // ???:感觉这里,非常不妥.代理的代理,隐式定义代理,非常不妥.
     // 给照片视图设置代理,以支持拖放等操作.
     photoView.delegate = self.delegate;
     
-    if (nil == self.photoViews) {
+    if (nil == self.photoCells) {
         NSMutableDictionary * photoViews = [[NSMutableDictionary alloc] initWithCapacity: 42];
-        self.photoViews = photoViews;
+        self.photoCells = photoViews;
         [photoViews release];
     }
     
     if (NO == [self.photoCV.subviews containsObject: photoView]) { // 添加为相册容器的子视图.
         [self.photoCV addSubview: photoView];
     }
+    
+    
+    /* 添加触摸手势,响应选中事件 */
+    __block BOOL result = NO; // 用来标记照片视图是否已经添加过触摸手势.
+    [photoView.gestureRecognizers enumerateObjectsUsingBlock:^(UIGestureRecognizer * obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass: [UITapGestureRecognizer class]]) {
+            result = YES;
+            * stop = YES;
+        }
+    }];
+    
+    if (YES != result) { // 触摸手势不存在.
+        UITapGestureRecognizer * recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(DidSelectPhotoAction:)];
+        [photoView addGestureRecognizer: recognizer];
+    }
+    
     // !!!:临时添加输出对象地址,来判断是否是同一对象
     NSLog(@"%ld : %p", index,photoView);
     
-    [self.photoViews setObject:photoView forKey:[NSNumber numberWithInteger: index]];
+    [self.photoCells setObject:photoView forKey:[NSNumber numberWithInteger: index]];
 }
 
+// ???:如何不让导航栏悬浮!就像tableView一样!
+// ???:如何禁止上下移动.
 - (NSArray *) latestIndexesForVisiblePhotoViews
 {
     NSRange range = [self latestRangeForVisiblePhotoViews];
@@ -277,5 +302,23 @@
     
     return number;
 }
+
+- (void) DidSelectPhotoAction: (UITapGestureRecognizer *) gesture
+{
+    /* 获取此图片的位置 */
+    CFPhotoViewCell * cell = (CFPhotoViewCell *)gesture.view;
+    __block NSUInteger index = 0;
+    
+    [self.photoCells enumerateKeysAndObjectsUsingBlock:^(NSNumber * key, CFPhotoViewCell * obj, BOOL *stop) {
+        if (obj == cell) {
+            index = [key integerValue];
+            *stop = YES;
+        }
+    } ];
+    
+    // 通知代理进行处理
+    [self.delegate albumView: self didSelectPhotoAtIndex: index];
+}
+
 
 @end

@@ -7,18 +7,10 @@
 //
 
 #import "CFPhotoInfoViewController.h"
-
-@interface CFPhotoInfoViewController ()
-
-@end
+#import "CFAlbumController.h"
+#import "CFPhotoInfoView.h"
 
 @implementation CFPhotoInfoViewController
--(void)dealloc
-{
-    self.title = nil;
-    
-    [super dealloc];
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,17 +21,24 @@
     return self;
 }
 
+- (void)loadView
+{
+    CFPhotoInfoView * temp = [[CFPhotoInfoView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    temp.nameOfPhoto = [[[CFAlbumController sharedInstance] namesOfPhotos] objectAtIndex: self.index];
+    
+    self.view = temp;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = self.title;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(didBackBarButtonItemAction:)];
 }
 
 - (void) didBackBarButtonItemAction: (id) sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [[CFAlbumController sharedInstance] swithToAlbumView];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -51,4 +50,19 @@
     
 }
 
+- (void)setIndex:(NSUInteger)index
+{
+    _index = index;
+    
+    /* 设置导航栏标题 */
+    NSUInteger total = [CFAlbumController sharedInstance].namesOfPhotos.count;
+    NSString * title = [[NSString alloc] initWithFormat:@"正在显示 %lu/%lu", index + 1, total];
+    
+    self.navigationItem.title = title;
+    
+    /* 设置图片 */
+    NSString * nameOfPhoto = [[CFAlbumController sharedInstance].namesOfPhotos objectAtIndex:index];
+    
+    self.view.nameOfPhoto = nameOfPhoto;
+}
 @end

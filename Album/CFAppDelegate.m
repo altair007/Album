@@ -33,13 +33,12 @@
     sharedInstance.albumVC = albumVC;
     [albumVC release];
     
-    // ???:自动释放,好吗?
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:sharedInstance.albumVC];
     
-    // ???:应该是无法获取图片的缘故!
     CFAlbumModel * albumModel = [[CFAlbumModel alloc] initWithSuccessBlock:^(CFAlbumModel * albumModel) {
         self.window.rootViewController = navController;
         [navController release];
+        
         [self.window makeKeyAndVisible];
     } failBlock:^(NSError * error) {
     }];

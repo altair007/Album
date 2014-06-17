@@ -57,16 +57,6 @@
     }
 }
 
-- (void) tapGesture: (UITapGestureRecognizer *) gesture
-{
-    CFPhotoInfoViewController * photoVC = [[CFPhotoInfoViewController alloc] init];
-    photoVC.title = self.view.infoLabel.text;
-    
-    [self.navigationController pushViewController:photoVC animated:YES];
-    
-    [photoVC release];
-}
-
 - (void) handlePageControlAction:(UIPageControl *)pageControl
 {
     // 计算需要的内容偏移量.
@@ -95,6 +85,11 @@
 - (CGFloat) widthForPhotoInAlbumView: (CFAlbumView *) albumView
 {
     return albumView.frame.size.width;
+}
+
+- (void) albumView:(CFAlbumView *)albumView didSelectPhotoAtIndex: (NSUInteger) index
+{
+    [[CFAlbumController sharedInstance] swithToPhotoInfoViewAtIndex: index];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *) scrollView

@@ -20,6 +20,6 @@
  *  @param fail     获取图片失败时执行的操作.
  */
 + (void) imageForAssetUrl: (NSString *) assetUrl
-                  success: (void(^)(UIImage *)) successBlock
+                  success: (void(^)(UIImage * img)) successBlock
                      fail: (void(^)()) failBlock;
 @end

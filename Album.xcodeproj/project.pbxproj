@@ -11,6 +11,8 @@
 		C2175E86194F0C2900460693 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2175E85194F0C2900460693 /* AssetsLibrary.framework */; };
 		C2175E8A194F192500460693 /* UIImage+AssetUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = C2175E89194F192500460693 /* UIImage+AssetUrl.m */; };
 		C2218D8D194C2BC000CD7BE7 /* CFPhotoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2218D8C194C2BC000CD7BE7 /* CFPhotoViewCell.m */; };
+		C22EE67C194FDC9D0080F3A1 /* CFPhotoInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE67B194FDC9D0080F3A1 /* CFPhotoInfoViewController.m */; };
+		C22EE6BA194FE8E40080F3A1 /* CFPhotoInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C22EE6B9194FE8E40080F3A1 /* CFPhotoInfoView.m */; };
 		C23446D3194BEBD200B32839 /* the_secret_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446C9194BEBD200B32839 /* the_secret_1.jpg */; };
 		C23446D4194BEBD200B32839 /* the_secret_10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446CA194BEBD200B32839 /* the_secret_10.jpg */; };
 		C23446D5194BEBD200B32839 /* the_secret_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C23446CB194BEBD200B32839 /* the_secret_2.jpg */; };
@@ -25,7 +27,6 @@
 		C23446E6194BF03000B32839 /* CFAlbumController.m in Sources */ = {isa = PBXBuildFile; fileRef = C23446E5194BF03000B32839 /* CFAlbumController.m */; };
 		C23446EA194BF1D800B32839 /* CFAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C23446E9194BF1D800B32839 /* CFAlbumViewController.m */; };
 		C2344747194C0C0F00B32839 /* CFAlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2344744194C0C0F00B32839 /* CFAlbumView.m */; };
-		C2344748194C0C0F00B32839 /* CFPhotoInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2344746194C0C0F00B32839 /* CFPhotoInfoViewController.m */; };
 		C2610DAF1938A7F5003E034A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2610DAE1938A7F5003E034A /* Foundation.framework */; };
 		C2610DB11938A7F5003E034A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2610DB01938A7F5003E034A /* CoreGraphics.framework */; };
 		C2610DB31938A7F5003E034A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2610DB21938A7F5003E034A /* UIKit.framework */; };
@@ -61,6 +62,10 @@
 		C2175E89194F192500460693 /* UIImage+AssetUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AssetUrl.m"; sourceTree = "<group>"; };
 		C2218D8B194C2BC000CD7BE7 /* CFPhotoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoViewCell.h; sourceTree = "<group>"; };
 		C2218D8C194C2BC000CD7BE7 /* CFPhotoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFPhotoViewCell.m; sourceTree = "<group>"; };
+		C22EE67A194FDC9D0080F3A1 /* CFPhotoInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoInfoViewController.h; sourceTree = "<group>"; };
+		C22EE67B194FDC9D0080F3A1 /* CFPhotoInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFPhotoInfoViewController.m; sourceTree = "<group>"; };
+		C22EE6B8194FE8E40080F3A1 /* CFPhotoInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoInfoView.h; sourceTree = "<group>"; };
+		C22EE6B9194FE8E40080F3A1 /* CFPhotoInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFPhotoInfoView.m; sourceTree = "<group>"; };
 		C23446C9194BEBD200B32839 /* the_secret_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_1.jpg; sourceTree = "<group>"; };
 		C23446CA194BEBD200B32839 /* the_secret_10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_10.jpg; sourceTree = "<group>"; };
 		C23446CB194BEBD200B32839 /* the_secret_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = the_secret_2.jpg; sourceTree = "<group>"; };
@@ -79,8 +84,6 @@
 		C23446E9194BF1D800B32839 /* CFAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAlbumViewController.m; sourceTree = "<group>"; };
 		C2344743194C0C0F00B32839 /* CFAlbumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAlbumView.h; sourceTree = "<group>"; };
 		C2344744194C0C0F00B32839 /* CFAlbumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAlbumView.m; sourceTree = "<group>"; };
-		C2344745194C0C0F00B32839 /* CFPhotoInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFPhotoInfoViewController.h; sourceTree = "<group>"; };
-		C2344746194C0C0F00B32839 /* CFPhotoInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFPhotoInfoViewController.m; sourceTree = "<group>"; };
 		C2610DAB1938A7F5003E034A /* Album.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Album.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2610DAE1938A7F5003E034A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C2610DB01938A7F5003E034A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -134,6 +137,17 @@
 			path = "UIImage-AssetUrl";
 			sourceTree = "<group>";
 		};
+		C22EE679194FDC520080F3A1 /* PhotoInfo */ = {
+			isa = PBXGroup;
+			children = (
+				C22EE67A194FDC9D0080F3A1 /* CFPhotoInfoViewController.h */,
+				C22EE67B194FDC9D0080F3A1 /* CFPhotoInfoViewController.m */,
+				C22EE6B8194FE8E40080F3A1 /* CFPhotoInfoView.h */,
+				C22EE6B9194FE8E40080F3A1 /* CFPhotoInfoView.m */,
+			);
+			path = PhotoInfo;
+			sourceTree = "<group>";
+		};
 		C23446C8194BEBD200B32839 /* img */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,8 +186,6 @@
 				C2218D8C194C2BC000CD7BE7 /* CFPhotoViewCell.m */,
 				C23446E8194BF1D800B32839 /* CFAlbumViewController.h */,
 				C23446E9194BF1D800B32839 /* CFAlbumViewController.m */,
-				C2344745194C0C0F00B32839 /* CFPhotoInfoViewController.h */,
-				C2344746194C0C0F00B32839 /* CFPhotoInfoViewController.m */,
 				C215AAF3194D5659008B60A1 /* CFPhotoContainerView.h */,
 				C215AAF4194D5659008B60A1 /* CFPhotoContainerView.m */,
 				C215AAF6194D7EA1008B60A1 /* CFAlbumViewDelegate.h */,
@@ -221,6 +233,7 @@
 				C2610DC01938A7F5003E034A /* Images.xcassets */,
 				C23446E0194BEFEC00B32839 /* core */,
 				C23446E7194BF15700B32839 /* mainPage */,
+				C22EE679194FDC520080F3A1 /* PhotoInfo */,
 				C2175E87194F192500460693 /* UIImage-AssetUrl */,
 				C2610DB51938A7F5003E034A /* Supporting Files */,
 				C2610DE01938A8E6003E034A /* readme.md */,
@@ -368,11 +381,12 @@
 				C2610DBB1938A7F5003E034A /* main.m in Sources */,
 				C2344747194C0C0F00B32839 /* CFAlbumView.m in Sources */,
 				C2175E8A194F192500460693 /* UIImage+AssetUrl.m in Sources */,
-				C2344748194C0C0F00B32839 /* CFPhotoInfoViewController.m in Sources */,
 				C2610DBF1938A7F5003E034A /* CFAppDelegate.m in Sources */,
 				C23446E3194BEFEC00B32839 /* CFAlbumModel.m in Sources */,
 				C23446EA194BF1D800B32839 /* CFAlbumViewController.m in Sources */,
+				C22EE67C194FDC9D0080F3A1 /* CFPhotoInfoViewController.m in Sources */,
 				C215AAF5194D5659008B60A1 /* CFPhotoContainerView.m in Sources */,
+				C22EE6BA194FE8E40080F3A1 /* CFPhotoInfoView.m in Sources */,
 				C2218D8D194C2BC000CD7BE7 /* CFPhotoViewCell.m in Sources */,
 				C23446E6194BF03000B32839 /* CFAlbumController.m in Sources */,
 			);

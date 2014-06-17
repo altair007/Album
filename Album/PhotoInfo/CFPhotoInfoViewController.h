@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CFPhotoInfoView.h"
 
 @interface CFPhotoInfoViewController : UIViewController
-// ???:感觉这个属性没必要!
-@property (copy ,nonatomic) NSString * title; //!< 标题
-
+@property (assign, nonatomic) NSUInteger index; //!< 相片位置.
+@property (retain, nonatomic) CFPhotoInfoView * view; //!< 父类的view属性.
 @end
