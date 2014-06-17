@@ -23,8 +23,7 @@
 
 - (void)loadView
 {
-    CFPhotoInfoView * temp = [[CFPhotoInfoView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    temp.nameOfPhoto = [[[CFAlbumController sharedInstance] namesOfPhotos] objectAtIndex: self.index];
+    CFPhotoViewCell * temp = [[CFPhotoViewCell alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     self.view = temp;
 }
@@ -50,6 +49,11 @@
     
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    NSLog(@"photoInfoView:%@", NSStringFromCGRect(self.view.imageView.frame));
+}
+
 - (void)setIndex:(NSUInteger)index
 {
     _index = index;
@@ -65,4 +69,6 @@
     
     self.view.nameOfPhoto = nameOfPhoto;
 }
+
+
 @end

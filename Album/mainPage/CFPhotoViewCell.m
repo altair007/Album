@@ -70,6 +70,7 @@
 {
     // ???:为什么重新设置之后,不再支持缩放了?缩放后无法复原!
     self.frame = frame;
+//    self.imageView.frame = frame;
 }
 
 

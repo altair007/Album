@@ -33,4 +33,8 @@
     [super setContentSize: contentSize];
 }
 
+-(void)drawRect:(CGRect)rect
+{
+    
+}
 @end

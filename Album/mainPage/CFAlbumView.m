@@ -107,16 +107,7 @@
     NSUInteger numberOfPhotos = [self.dataSource numberOfPhotosInAlbumView:self];
     
     // 设置相册容器的内容偏移量
-    // !!!:临时删除.
-//    self.photoCV.contentSize = CGSizeMake(self.frame.size.width * numberOfPhotos, self.frame.size.height);
-    // ???: 控制器到底是在什么时机设置或者调整视图的frame的?willapperar?
-    // ???:此处的高是0?
-    CGSize size = self.photoCV.contentSize;
-    
-        self.photoCV.contentSize = CGSizeMake(self.frame.size.width * numberOfPhotos, self.photoCV.contentSize.height);
-    
-    // ???:此处的高是0?
-    size = self.photoCV.contentSize;
+    self.photoCV.contentSize = CGSizeMake(self.frame.size.width * numberOfPhotos, self.photoCV.contentSize.height);
     
     // 设置页面控制器的页数.
     self.pageControl.numberOfPages = numberOfPhotos;
@@ -273,12 +264,11 @@
     
     // !!!:临时添加输出对象地址,来判断是否是同一对象
     NSLog(@"%ld : %p", index,photoView);
+    NSLog(@"imageViewCell:%@", NSStringFromCGRect(photoView.frame));
     
     [self.photoCells setObject:photoView forKey:[NSNumber numberWithInteger: index]];
 }
 
-// ???:如何不让导航栏悬浮!就像tableView一样!
-// ???:如何禁止上下移动.
 - (NSArray *) latestIndexesForVisiblePhotoViews
 {
     NSRange range = [self latestRangeForVisiblePhotoViews];
@@ -320,5 +310,26 @@
     [self.delegate albumView: self didSelectPhotoAtIndex: index];
 }
 
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    
+    // 更新页面组件边框信息.
+    [self updateFramesOfComponents];
+}
 
+- (void) updateFramesOfComponents
+{
+    self.photoCV.frame = self.frame;
+    
+    /* 考虑到导航栏的影响,各组件应使用换算后的真实有效高度值 */
+    CGFloat realHeight = self.frame.size.height + self.bounds.origin.y;
+    
+    NSUInteger numberOfPhotos = [self.dataSource numberOfPhotosInAlbumView:self];
+    self.photoCV.contentSize = CGSizeMake(self.frame.size.width * numberOfPhotos, self.photoCV.contentSize.height);
+    
+    self.pageControl.frame = CGRectMake(0, realHeight * 0.95, self.frame.size.width, realHeight * 0.05);
+    
+    self.infoLabel.frame = CGRectMake( 0, 0, self.frame.size.width * 0.3, realHeight * 0.05);
+}
 @end

@@ -79,4 +79,9 @@
  */
 - (void) DidSelectPhotoAction: (UITapGestureRecognizer *) gesture;
 
+/**
+ *  更新页面组件的边框信息.
+ */
+- (void) updateFramesOfComponents;
+
 @end
