@@ -53,7 +53,7 @@
     [photoCV release];
     
     /* 创建支持页面切换的控件. */
-    UIPageControl * pageC = [[[UIPageControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height * 0.95, self.frame.size.width, self.frame.size.height * 0.05)] autorelease];
+    UIPageControl * pageC = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height * 0.95, self.frame.size.width, self.frame.size.height * 0.05)];
     
     // 设置背景颜色
     pageC.backgroundColor = [UIColor grayColor];
@@ -71,16 +71,14 @@
     // 设置何时显示当前页(圆点)
     pageC.defersCurrentPageDisplay = YES;
     
-    
-    
     // 添加响应方法
-    [pageC addTarget:[CFAlbumController sharedInstance].albumVC action:@selector(handlePageControlAction:) forControlEvents: UIControlEventValueChanged];
+    [pageC addTarget:(CFAlbumViewController *)self.delegate action:@selector(handlePageControlAction:) forControlEvents: UIControlEventValueChanged];
     
     self.pageControl = pageC;
     [pageC release];
     
     /* 设置用于显示相册信息的label */
-    UILabel * label = [[[UILabel alloc] init] autorelease];
+    UILabel * label = [[UILabel alloc] init];
     
     label.adjustsFontSizeToFitWidth = YES;
     label.textColor = [UIColor blackColor];
@@ -115,7 +113,6 @@
     self.pageControl.numberOfPages = numberOfPhotos;
 }
 
-// ???:该改一下方法名了!
 - (CFPhotoViewCell *) dequeueReusablePhotoViewAtIndex: (NSUInteger) index
 {
     __block CFPhotoViewCell * result = [self.photoCells objectForKey: [NSNumber numberWithInteger: index]];
@@ -281,9 +278,6 @@
         UITapGestureRecognizer * recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(DidSelectPhotoAction:)];
         [photoView addGestureRecognizer: recognizer];
     }
-    
-    // !!!:临时添加输出对象地址,来判断是否是同一对象
-    NSLog(@"%ld : %p", index,photoView);
 
     [self.photoCells setObject:photoView forKey:[NSNumber numberWithInteger: index]];
 }
@@ -302,7 +296,7 @@
         [indexes addObject:[NSNumber numberWithInteger:(i + j)]];
     }
     
-    return indexes;
+    return [indexes autorelease];
 }
 
 - (NSUInteger) numberOfPhotos

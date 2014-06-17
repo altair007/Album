@@ -71,6 +71,7 @@
     NSString * title = [[NSString alloc] initWithFormat:@"正在显示 %lu / %lu", index + 1, total];
     
     self.navigationItem.title = title;
+    [title release];
     
     /* 设置图片 */
     NSString * nameOfPhoto = [[CFAlbumController sharedInstance].namesOfPhotos objectAtIndex:index];

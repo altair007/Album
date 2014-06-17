@@ -26,4 +26,11 @@
  */
 - (NSString *) photoNameAtIndex: (NSUInteger) index;
 
+/**
+ *  响应页面控制器事件.
+ *
+ *  @param pageControl 页面控制器.
+ */
+- (void) handlePageControlAction:(UIPageControl *)pageControl;
+
 @end
