@@ -44,6 +44,9 @@
 
 - (void) setupSubviews
 {
+    // 设置背景颜色.
+    self.backgroundColor = [UIColor grayColor];
+    
     /* 设置相片容器 */
     CFPhotoContainerView * photoCV = [[CFPhotoContainerView alloc] initWithFrame:self.frame];
     self.photoCV = photoCV;
@@ -77,8 +80,7 @@
     [pageC release];
     
     /* 设置用于显示相册信息的label */
-    // FIXEME:64明显不是最优值!
-    UILabel * label = [[[UILabel alloc] initWithFrame:CGRectMake( 0, 64, self.frame.size.width * 0.3, self.frame.size.height * 0.05)] autorelease];
+    UILabel * label = [[[UILabel alloc] init] autorelease];
     
     label.adjustsFontSizeToFitWidth = YES;
     label.textColor = [UIColor blackColor];
@@ -215,7 +217,7 @@
 - (void) showPhotoViewAtIndex: (NSUInteger) index
 {
     /*  设置信息栏和页面控制器. */
-    NSString * info = [[NSString alloc] initWithFormat:@"正在显示页数 %lu / %lu", index + 1, [self numberOfPhotos]];
+    NSString * info = [[NSString alloc] initWithFormat:@"正在显示 %lu / %lu", index + 1, [self numberOfPhotos]];
     
     self.infoLabel.text = info;
     [info release];
@@ -264,8 +266,7 @@
     
     // !!!:临时添加输出对象地址,来判断是否是同一对象
     NSLog(@"%ld : %p", index,photoView);
-    NSLog(@"imageViewCell:%@", NSStringFromCGRect(photoView.frame));
-    
+
     [self.photoCells setObject:photoView forKey:[NSNumber numberWithInteger: index]];
 }
 

@@ -12,6 +12,7 @@
 
 @implementation CFPhotoInfoViewController
 
+// ???:有一个BUG:  初次加载详情页视图时,有一定几率出现短暂的空白!
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,31 +33,18 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(didBackBarButtonItemAction:)];
-    // ???:无效.
-//    id  a = self.navigationController;
-    CGRect rect = self.view.frame;
-    rect.origin.y = 64;
-    self.view.frame = rect;
-    
-    NSLog(@"frame: %@", NSStringFromCGRect(self.view.frame));
-    NSLog(@"bounds: %@", NSStringFromCGRect(self.view.bounds));
 
-}
-
-//???:待删除.
-- (void)viewWillAppear:(BOOL)animated
-{
-    NSLog(@"frame: %@", NSStringFromCGRect(self.view.frame));
-    NSLog(@"bounds: %@", NSStringFromCGRect(self.view.bounds));
-
-//    if ((nil != self.navigationController) && (NO == [self.navigationController isNavigationBarHidden])) { // 导航栏存在且未隐藏,视图整体下移64(导航栏高度).
-//        CGRect rect = self.view.frame;
-//        rect.origin.y = 64;
-//        self.view.frame = rect;
-//    }
-//    NSLog(@"frame: %@", NSStringFromCGRect(self.view.frame));
-//    NSLog(@"bounds: %@", NSStringFromCGRect(self.view.bounds));
+    if (nil != self.navigationItem) { // 存在导航栏
+        // 不让导航栏遮蔽视图.
+        CGRect rect = self.view.bounds;
+        rect.origin.y = -64;
+        self.view.bounds = rect;
+        
+        // 自定义返回按钮
+        UIBarButtonItem * backItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(didBackBarButtonItemAction:)];
+        self.navigationItem.leftBarButtonItem = backItem;
+        [backItem release];
+    }
 }
 
 - (void) didBackBarButtonItemAction: (id) sender

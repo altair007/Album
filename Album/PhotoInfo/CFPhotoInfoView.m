@@ -9,6 +9,10 @@
 #import "CFPhotoInfoView.h"
 #import "UIImage+AssetUrl.h"
 
+@interface CFPhotoInfoView ()
+@property (retain, nonatomic, readwrite) UIImageView * imageView; //!< 相片视图.
+@end
+
 @implementation CFPhotoInfoView
 - (void)dealloc
 {
@@ -33,6 +37,7 @@
         if (nil == self.imageView) {
             UIImageView * imageView = [[UIImageView alloc]init];
             self.imageView = imageView;
+            [self addSubview: imageView];
             [imageView release];
         }
         
@@ -53,8 +58,7 @@
     /* 考虑到导航栏的影响,各组件应使用换算后的真实有效高度值 */
     CGFloat realHeight = self.frame.size.height + self.bounds.origin.y;
     
-    // ???:为什么详情页面没有图像了?需要一个单独更新内容的方法?
-    self.imageView.frame = CGRectMake(0, 0, 100, 100);
+    self.imageView.frame = CGRectMake(0, 0, self.frame.size.width, realHeight);
 }
 
 @end

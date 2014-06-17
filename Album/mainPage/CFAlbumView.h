@@ -11,7 +11,6 @@
 #import "CFAlbumViewDelegate.h"
 #import "CFAlbumViewDataSource.h"
 
-// ???:应该是可以通过内容模式,boud等,取消内层UIScrollView的需要.
 @class CFPhotoViewCell;
 @class CFPhotoContainerView;
 

@@ -29,11 +29,8 @@
 
 - (void)loadView
 {
-    CGRect  rect = [UIScreen mainScreen].bounds;
-    
-    CFAlbumView * albumView = [[CFAlbumView alloc] init];
-//    CFAlbumView * albumView = [[CFAlbumView alloc] initWithFrame: rect];
-    // ???:在没设置代理或数据源代理时,不应该让程序崩!应该对可选或者必选方法做出不同的处理!(容错)
+    CFAlbumView * albumView = [[CFAlbumView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+
     albumView.delegate = self;
     albumView.dataSource = self;
     
@@ -47,11 +44,11 @@
     // Do any additional setup after loading the view
     self.navigationItem.title = @"相册";
     
-    if ((nil != self.navigationController) && (NO == [self.navigationController isNavigationBarHidden])) { // 导航栏存在且未隐藏,视图整体下移64(导航栏高度).
+    if (nil != self.navigationItem) { // 导航栏存在,视图整体下移64(导航栏高度).
         CGRect rect = self.view.bounds;
         rect.origin.y = - 64;
         self.view.bounds = rect;
-        
+
         // 修正UIScrollowView的默认实现.
         self.view.photoCV.contentInset =UIEdgeInsetsMake(-64, 0, 0, 0);
     }
@@ -90,12 +87,6 @@
     return nameOfPhoto;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    NSLog(@"view- frame:%@", NSStringFromCGRect(self.view.photoCV.frame));
-    NSLog(@"view - bounce:%@", NSStringFromCGRect(self.view.photoCV.bounds));
-}
-
 # pragma mark - CFAlbumViewDelegate协议方法.
 - (CGFloat) widthForPhotoInAlbumView: (CFAlbumView *) albumView
 {
@@ -109,7 +100,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *) scrollView
 {
-
     // 获取图片总数量
     NSUInteger sum = [self.view numberOfPhotos];
     
@@ -124,6 +114,7 @@
         [self.view showPhotoViewAtIndex: [obj integerValue]];
     }];
 }
+
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {

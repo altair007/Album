@@ -80,7 +80,7 @@ static CFAlbumController * sharedObj = nil; //!< 单例对象.
     
     self.photoInfoVC.index = index;
 
-    [self.albumVC.navigationController pushViewController: self.photoInfoVC animated:YES];
+    [self.albumVC.navigationController pushViewController: self.photoInfoVC animated: YES];
     
 }
 

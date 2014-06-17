@@ -24,7 +24,7 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor greenColor];
+    self.window.backgroundColor = [UIColor grayColor];
     
     // 初始化主控制器
     CFAlbumController * sharedInstance = [CFAlbumController sharedInstance];
