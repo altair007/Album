@@ -115,6 +115,7 @@
     self.pageControl.numberOfPages = numberOfPhotos;
 }
 
+// ???:该改一下方法名了!
 - (CFPhotoViewCell *) dequeueReusablePhotoViewAtIndex: (NSUInteger) index
 {
     __block CFPhotoViewCell * result = [self.photoCells objectForKey: [NSNumber numberWithInteger: index]];
@@ -134,7 +135,7 @@
     }];
 
     CGRect rect = CGRectMake(index * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
-    [result prepareForReuseWithFrame:rect];
+    result.frame = rect;
     
     return result;
 }
@@ -216,6 +217,23 @@
 
 - (void) showPhotoViewAtIndex: (NSUInteger) index
 {
+    // 让已经存在但不可见的照片单元格恢复缩放前的状态.
+    [self.photoCells enumerateKeysAndObjectsUsingBlock:^(NSNumber * key, CFPhotoViewCell * cell, BOOL *stop) {
+        __block BOOL visilble = NO;
+        
+        [self.latestIndexesForVisiblePhotoViews enumerateObjectsUsingBlock:^(NSNumber * obj, NSUInteger idx, BOOL *stopInner) {
+            if ([obj isEqualToNumber: key]) {
+                visilble = YES;
+                * stopInner = YES;
+            }
+        }];
+        
+        if (NO == visilble) {
+            cell.zoomScale = 1.0;
+        }
+        
+    }];
+    
     /*  设置信息栏和页面控制器. */
     NSString * info = [[NSString alloc] initWithFormat:@"正在显示 %lu / %lu", index + 1, [self numberOfPhotos]];
     

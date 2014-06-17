@@ -26,6 +26,7 @@
     CFPhotoInfoView * temp = [[CFPhotoInfoView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     self.view = temp;
+    [temp release];
 }
 
 - (void)viewDidLoad

@@ -21,11 +21,4 @@ typedef id<UIScrollViewDelegate> CFPhotoViewCellDelegate;
  */
 - (void) setupSubviews;
 
-/**
- *  为复用做准备.
- *
- *  @param frame 边框值.
- */
-- (void) prepareForReuseWithFrame: (CGRect) frame;
-
 @end

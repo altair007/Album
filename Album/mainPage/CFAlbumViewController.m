@@ -141,8 +141,7 @@
     
     if (nil == photoView) {
         photoView = [[CFPhotoViewCell alloc] initWithFrame:CGRectMake(index * self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height)];
-        //        多余的?
-        //        [photoView autorelease];
+        [photoView autorelease];
     }
     
     // 设置照片视图属性.
