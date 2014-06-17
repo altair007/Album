@@ -17,4 +17,9 @@
  */
 - (void) updateFramesOfComponents;
 
+/**
+ *  设置子视图.
+ */
+- (void) setupSubviews;
+
 @end

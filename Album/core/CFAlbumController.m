@@ -60,6 +60,7 @@ static CFAlbumController * sharedObj = nil; //!< 单例对象.
     [super dealloc];
 }
 
+
 - (NSArray *) namesOfPhotos
 {
     return self.albumModel.namesOfPhotos;

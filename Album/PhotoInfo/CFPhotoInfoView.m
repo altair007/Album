@@ -27,22 +27,23 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        [self setupSubviews];
     }
     return self;
+}
+
+- (void) setupSubviews
+{
+    UIImageView * imageView = [[UIImageView alloc]init];
+    self.imageView = imageView;
+    [self addSubview: self.imageView];
+    [imageView release];
 }
 
 - (void)setNameOfPhoto:(NSString *)nameOfPhoto
 {
     [UIImage imageForAssetUrl:nameOfPhoto success:^(UIImage * img) {
-        if (nil == self.imageView) {
-            UIImageView * imageView = [[UIImageView alloc]init];
-            self.imageView = imageView;
-            [self addSubview: imageView];
-            [imageView release];
-        }
-        
         self.imageView.image = img;
-        
     } fail:NULL];
 }
 

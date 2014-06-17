@@ -12,7 +12,6 @@
 
 @implementation CFPhotoInfoViewController
 
-// ???:有一个BUG:  初次加载详情页视图时,有一定几率出现短暂的空白!
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -60,6 +59,7 @@
     }
     
 }
+
 
 - (void)setIndex:(NSUInteger)index
 {
