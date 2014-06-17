@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CFPhotoInfoView : UIImageView
+@interface CFPhotoInfoView : UIView
 @property (copy ,nonatomic) NSString * nameOfPhoto; //!< 相片名称.
+@property (retain, nonatomic) UIImageView * imageView; //!< 相片视图.
+
+/**
+ *  更新页面组件的边框信息.
+ */
+- (void) updateFramesOfComponents;
+
 @end

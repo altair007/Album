@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CFPhotoInfoView.h"
-#import "CFPhotoViewCell.h"
 
 @interface CFPhotoInfoViewController : UIViewController
 @property (assign, nonatomic) NSUInteger index; //!< 相片位置.
 // !!!:没必要继承自UIScrollView!
-@property (retain, nonatomic) CFPhotoViewCell * view; //!< 父类的view属性.
+@property (retain, nonatomic) CFPhotoInfoView * view; //!< 父类的view属性.
 @end
